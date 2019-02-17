@@ -10,6 +10,13 @@ public class PhysicalAttraction {
 
 
 	ClothingStyle clothing_style;
+	List[] height = {"shorter", "same", "taller"};
+	List[] hair_color = {"blonde", " brunette", "red", "other"};
+	List[] eye_color = {"brown", "blue", "green", "other"}
+	boolean nice_eyes;
+	boolean nice_smile;
+	boolean nice_smell;
+	boolean nice_jawline;
 
 	public PhysicalAttraction() {
 		clothing_style = new ClothingStyle();

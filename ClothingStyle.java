@@ -5,4 +5,8 @@ public class ClothingStyle {
 	// Subjectively stylish? {yes, no}
 	// Presentable {yes, no}
 
+	List[] pants = {"demin", "chinos", "athletic", "shorts", "skirt"};
+	List[] top = {"tee", "button-down", "hoodie", "blouse"};
+	List[] accessories = {"necklace", "hat", "scarf", "ring", "bracelet"};
+	boolean fitted;
 }

@@ -7,7 +7,7 @@ public class MateFinder {
     /**
      * variables:
      *
-     * Current goal: {hookup, emotional connection, long-term, o real intention (just accepting what happens)}
+     * Current goal: {hookup, emotional connection, long-term, no real intention (just accepting what happens)}
      * Drunkenness: {sober, buzzed, drunk, lit, tanked, sloshed, housed}
      * What race(s) am I generally attracted to {White, African American, Asian, latino/a, etc.}
      * Are we in an environment where making a move is encouraged? {don’t even think about it, be cautious, yeah sure, it would be weird if you didn’t}
