@@ -19,23 +19,23 @@ public class Main {
         Attraction low = new Attraction(medPhysicalAttraction, lowPersonality);
 
 
-        PotentialMate attractiveMate = new PotentialMate(allHigh);
-        PotentialMate semiAttractive = new PotentialMate(medium);
-        PotentialMate notAttractive = new PotentialMate(low);
+        PotentialMate attractiveMate = new PotentialMate(goodDate, "David");
+        PotentialMate semiAttractive = new PotentialMate(goodHookup, "Katie");
+        PotentialMate notAttractive = new PotentialMate(low, "Vish");
 
         List<PotentialMate> mateList = new ArrayList<>();
-        mateList.add(goodDate);
-        mateList.add(goodHookup);
-        mateList.add(low);
+        mateList.add(attractiveMate);
+        mateList.add(semiAttractive);
+        mateList.add(notAttractive);
 
         MateFinder mateFinder = new MateFinder(mateList);
 
         //input current sobriety(int: 1-10) and goals for potential mate(boolean: long term relationship?)
         
         //very drunk and not looking for long term
-        mateFinder.decide(3, false);
+        System.out.println(mateFinder.decide(3, false).getName());
         //sober and looking for long term relationship
-        mateFinder.decide(10, true);
+        System.out.println(mateFinder.decide(10, true).getName());
 
     }
 }
