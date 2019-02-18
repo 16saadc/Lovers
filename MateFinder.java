@@ -1,6 +1,9 @@
 import java.util.List;
 import java.util.ArrayList;
 // import PotentialMate;
+import Attraction;
+import PersonalityAttraction;
+import PhysicalAttraction;
 
 public class MateFinder {
 
@@ -32,11 +35,45 @@ public class MateFinder {
      * Go through list of candidates and assess each one
      * Evaluate most important traits
      * Evaluate the most important traits as of this moment (inputs: current goal, drunkenness)
-     * Make a move
+     * returns the best potential mate to make a move on
      */
 
-    public void decide(PotentialMate mate) {
-        // some way to decide
+    public PotentialMate decide(int sobriety, boolean longtermDate) {
+        List<PotentialMate> potentialMates = getPotentialMates();
+
+        PotentialMate bestOption;
+
+        int bestScore = -100;
+
+        for(PotentialMate mate: potentialMates) {
+            Attraction curAttraction = mate.getAttraction();
+            int personality = curAttraction.getPersonalityAttraction().getConfidence().getLevel();
+            int physical = curAttraction.getPhysicalAttraction().getLevel();
+    
+            int score = 0;
+
+            if(longTermDate) {
+                //weight personality high if going for long term relationship
+                score = score + personality * 2;
+            } else {
+                score = score + personality;
+            }
+
+            if(sobriety < 5) {
+                //if you aren't in the right state of mind everyone becomes more attractive and personality is not as important
+                score = score + physical*2 - personality/2;
+            } else {
+                score = score + physical;
+            }
+
+            if(score > bestScore) {
+                bestScore = score;
+                bestOption = mate;
+            }
+
+        }
+        return bestOption;
+
     }
 
 

@@ -11,4 +11,8 @@ public class Confidence {
         this.level = level;
     }
 
+    public int getLevel() {
+		return level;
+	}
+
 }
