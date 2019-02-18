@@ -5,4 +5,5 @@ public class ClothingStyle {
 	// Subjectively stylish? {yes, no}
 	// Presentable {yes, no}
 
+
 }

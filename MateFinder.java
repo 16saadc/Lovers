@@ -13,12 +13,19 @@ public class MateFinder {
      * Are we in an environment where making a move is encouraged? {don’t even think about it, be cautious, yeah sure, it would be weird if you didn’t}
      * Potential Mates: [mate A, mate B, …]
      */
-    List<PotentialMate> potential_mates;
+    private List<PotentialMate> potential_mates;
 
-    public MateFinder() {
-        potential_mates = new ArrayList<PotentialMate>();
+    public MateFinder(List<PotentialMate> mates) {
+        potential_mates = mates;
     }
 
+    public void setPotentialMates(List<PotentialMate> mates) {
+        potential_mates = mates;
+    }
+
+    public List<PotentialMate> getPotentialMates() {
+        return potential_mates;
+    }
 
     /**
      * methods:
@@ -27,5 +34,10 @@ public class MateFinder {
      * Evaluate the most important traits as of this moment (inputs: current goal, drunkenness)
      * Make a move
      */
+
+    public void decide(PotentialMate mate) {
+        // some way to decide
+    }
+
 
 }

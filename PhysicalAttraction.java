@@ -9,10 +9,19 @@ public class PhysicalAttraction {
 
 
 
-	ClothingStyle clothing_style;
+	private ClothingStyle clothing_style;
+	private int level;
+	// change to use non-numeric variables
+	public PhysicalAttraction(int level) {
+		this.level = level;
+	}
 
-	public PhysicalAttraction() {
-		clothing_style = new ClothingStyle();
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getLevel() {
+		return level;
 	}
 
 }
