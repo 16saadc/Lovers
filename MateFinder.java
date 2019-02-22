@@ -1,9 +1,7 @@
 import java.util.List;
 
 // possible more detailed move results
-enum Move {
-    FLIRT, DO_NOT_APPROACH, TALK_MORE, ASK_OUT
-}
+
 
 public class MateFinder {
 
@@ -17,62 +15,44 @@ public class MateFinder {
      * Potential Mates: [mate A, mate B, …]
      */
     private PotentialMate potentialMate;
+    private UserState currentState;
 
-    public MateFinder(PotentialMate mate) {
+    public MateFinder(PotentialMate mate, UserState currentState) {
         potentialMate = mate;
+        this.currentState = currentState;
     }
 
     public void setPotentialMate(PotentialMate mate) {
-        potentialMate = mates;
+        potentialMate = mate;
     }
 
-    public PotentialMate getPotentialMates() {
+    public PotentialMate getPotentialMate() {
         return potentialMate;
+    }
+
+    public void setCurrentState(UserState state) {
+        currentState = state;
+    }
+
+    public UserState getCurrentState() {
+        return currentState;
     }
 
     /**
      * methods:
-     * Go through list of candidates and assess each one
-     * Evaluate most important traits
-     * Evaluate the most important traits as of this moment (inputs: current goal, drunkenness)
+     * assess the candidate's state
+     * Evaluate most important traits based on state
      *
-     * returns the best potential mate to make a move on
+     * returns the move to make
      */
 
-    public Move decide(int sobriety, boolean longtermDate) {
-        List<PotentialMate> potentialMates = getPotentialMates();
+    public Move decide() {
 
-        PotentialMate bestOption = potentialMates.get(0);
-
-        int bestScore = -100;
-
-        for (PotentialMate mate: potentialMates) {
-            int personality = mate.getAttraction().getPersonalityAttraction().getConfidence().getLevel();
-            int physical = mate.getAttraction().getPhysicalAttraction().getLevel();
-
-            int score = 0;
-
-            if (longtermDate) {
-                //weight personality high if going for long term relationship
-                score = score + personality * 2;
-            } else {
-                score = score + personality;
-            }
-
-            if (sobriety < 5) {
-                //if you aren't in the right state of mind everyone becomes more attractive and personality is not as important
-                score = score + physical*2 - personality/2;
-            } else {
-                score = score + physical;
-            }
-
-            if (score > bestScore) {
-                bestScore = score;
-                bestOption = mate;
-            }
-
+        if (currentState.getSobriety().equals(Sobriety.SOBER)) {
+            return Move.ASK_OUT;
         }
-        return bestOption;
+        return Move.DO_NOT_APPROACH;
+
 
     }
 

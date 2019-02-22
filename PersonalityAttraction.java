@@ -1,6 +1,4 @@
-enum PersonalityLevel {
-    LOW, MEDIUM, HIGH;
-}
+
 
 public class PersonalityAttraction {
 	// How easy is conversation {forced, it’s alright, we don’t stop talking, not sure}
@@ -8,17 +6,17 @@ public class PersonalityAttraction {
 	// Funny {Toby from the office, … , i peed my pants laughing}
 
 
-    private PersonalityLevel personalityLevel;
+    private Level personalityLevel;
 
-    public PersonalityAttraction(PersonalityLevel personalityLevel) {
+    public PersonalityAttraction(Level personalityLevel) {
         this.personalityLevel = personalityLevel;
     }
 
-    public PersonalityLevel getPersonalityLevel() {
+    public Level getPersonalityLevel() {
         return personalityLevel;
     }
 
-    public void setPersonalityLevel(PersonalityLevel personalityLevel) {
+    public void setPersonalityLevel(Level personalityLevel) {
         this.personalityLevel = personalityLevel;
     }
 

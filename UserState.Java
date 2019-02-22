@@ -36,21 +36,17 @@ public class UserState {
         this.sobriety = sobriety;
     }
 
-    public MateState setMateState(MateState mateState) {
+    public MateState getMateState() {
+        return mateState;
+    }
+
+    public void setMateState(MateState mateState) {
         this.mateState = mateState;
     }
 }
 
 
 
-enum RelationshipGoal {
-    LONG_TERM, ONE_NIGHT, UNSURE;
-}
 
-enum Sobriety {
-    SOBER, TIPSY, DRUNK, BLACKOUT;
-}
 
-enum MateState {
-    NEVER_MET, FRIENDS, FAMILIAR, ALREADY_CRUSH;
-}
+

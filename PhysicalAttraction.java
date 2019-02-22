@@ -1,13 +1,12 @@
-enum PhysicalAttractionLevel {
-	LOW, MEDIUM, HIGH;
-}
+
 
 // Possible more detailed enum:
 //
-
+/*
 enum PhysAttractionLevel {
 	UGLY, CUTE, BEAUTIFUL, HOT, HANDSOME; // etc...
 }
+*/
 
 public class PhysicalAttraction {
 	// Style of clothing / dress {dressed well, dressed sloppily}
@@ -21,17 +20,17 @@ public class PhysicalAttraction {
 
 
 	private ClothingStyle clothing_style; // make this an enum?
-	private PhysicalAttractionLevel level;
+	private Level level;
 	// change to use non-numeric variables
-	public PhysicalAttraction(PhysAttractionLevel level) {
+	public PhysicalAttraction(Level level) {
 		this.level = level;
 	}
 
-	public void setLevel(PhysicalAttractionLevel level) {
+	public void setLevel(Level level) {
 		this.level = level;
 	}
 
-	public PhysicalAttractionLevel getLevel() {
+	public Level getLevel() {
 		return level;
 	}
 

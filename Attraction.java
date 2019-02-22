@@ -1,6 +1,4 @@
-enum AttractionLevel {
-    LOW, MEDIUM, HIGH;
-}
+
 
 public class Attraction {
     /**
