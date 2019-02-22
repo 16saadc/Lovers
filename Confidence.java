@@ -1,3 +1,7 @@
+enum ConfidenceLevel {
+    LOW, MEDIUM, HIGH;
+}
+
 public class Confidence {
 	// Experience with dating {none, little, a lot, too much}
 	// Insecurity
@@ -5,14 +9,18 @@ public class Confidence {
 	// Humility {none, kind of, Tim Tebow}
 
     // will change this to a non-numerical variable
-    private int level;
+    private ConfidenceLevel level;
 
-    public Confidence(int level) {
+    public Confidence(ConfidenceLevel level) {
         this.level = level;
     }
 
-    public int getLevel() {
+    public ConfidenceLevel getLevel() {
 		return level;
 	}
+
+    public void setConfidenceLevel(ConfidenceLevel level) {
+        this.level = level;
+    }
 
 }

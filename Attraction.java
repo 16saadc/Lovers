@@ -1,9 +1,14 @@
+enum AttractionLevel {
+    LOW, MEDIUM, HIGH;
+}
+
 public class Attraction {
     /**
      * physical attraction
      * personality attraction
      * confidence level
      */
+
 
     private PhysicalAttraction physical_attraction;
     private PersonalityAttraction personality_attraction;
