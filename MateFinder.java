@@ -1,5 +1,10 @@
 import java.util.List;
 
+// possible more detailed move results
+enum Move {
+    FLIRT, DO_NOT_APPROACH, TALK_MORE, ASK_OUT
+}
+
 public class MateFinder {
 
     /**
@@ -11,18 +16,18 @@ public class MateFinder {
      * Are we in an environment where making a move is encouraged? {don’t even think about it, be cautious, yeah sure, it would be weird if you didn’t}
      * Potential Mates: [mate A, mate B, …]
      */
-    private List<PotentialMate> potential_mates;
+    private PotentialMate potentialMate;
 
-    public MateFinder(List<PotentialMate> mates) {
-        potential_mates = mates;
+    public MateFinder(PotentialMate mate) {
+        potentialMate = mate;
     }
 
-    public void setPotentialMates(List<PotentialMate> mates) {
-        potential_mates = mates;
+    public void setPotentialMate(PotentialMate mate) {
+        potentialMate = mates;
     }
 
-    public List<PotentialMate> getPotentialMates() {
-        return potential_mates;
+    public PotentialMate getPotentialMates() {
+        return potentialMate;
     }
 
     /**
@@ -34,7 +39,7 @@ public class MateFinder {
      * returns the best potential mate to make a move on
      */
 
-    public PotentialMate decide(int sobriety, boolean longtermDate) {
+    public Move decide(int sobriety, boolean longtermDate) {
         List<PotentialMate> potentialMates = getPotentialMates();
 
         PotentialMate bestOption = potentialMates.get(0);
@@ -44,7 +49,7 @@ public class MateFinder {
         for (PotentialMate mate: potentialMates) {
             int personality = mate.getAttraction().getPersonalityAttraction().getConfidence().getLevel();
             int physical = mate.getAttraction().getPhysicalAttraction().getLevel();
-    
+
             int score = 0;
 
             if (longtermDate) {
