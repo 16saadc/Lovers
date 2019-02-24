@@ -29,7 +29,6 @@ public class Main {
 
         MateFinder mateFinder = new MateFinder(attractiveMate, sober_longTerm);
 
-        //input current sobriety(int: 1-10) and goals for potential mate(boolean: long term relationship?)
 
         //very drunk and not looking for long term
         System.out.println(mateFinder.getPotentialMate().getName() + ": " + mateFinder.decide());
