@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        UserState sober_longTerm = new UserState(RelationshipGoal.LONG_TERM, Sobriety.SOBER, MateState.FRIENDS);
+        UserState sober_longTerm = new UserState(RelationshipGoal.LONG_TERM, Sobriety.SOBER, MateState.FRIENDS, Environment.INVITING);
 
         PhysicalAttraction highPhysicalAttraction = new PhysicalAttraction(Level.HIGH);
         PhysicalAttraction lowPhysicalAttraction = new PhysicalAttraction(Level.LOW);

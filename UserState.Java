@@ -11,12 +11,15 @@ public class UserState {
     private RelationshipGoal goal;
     private Sobriety sobriety;
     private MateState mateState;
+    private Environment environment;
 
 
-    public UserState(RelationshipGoal goal, Sobriety sobriety, MateState mateState) {
+    public UserState(RelationshipGoal goal, Sobriety sobriety, MateState mateState,
+                    Environment environment) {
         this.goal = goal;
         this.sobriety = sobriety;
         this.mateState = mateState;
+        this.environment = environment;
     }
 
 
@@ -43,6 +46,14 @@ public class UserState {
     public void setMateState(MateState mateState) {
         this.mateState = mateState;
     }
+
+    public Environment getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }    
 }
 
 

@@ -16,6 +16,9 @@ public class PotentialMate {
     // How happy are they? {depressed, normal, happy, contagious}
     // Similar interests? {no, yes}
     // Similar background {no, yes}
+    // Exiting professional relationship?{Yes coworkers or student/teacher dynamic, none}
+    // Experienced sexually? {has kissed, a long term boyfriend, dates around, hooks up with everyone}
+
 
    private Attraction attraction;
    private String name;
