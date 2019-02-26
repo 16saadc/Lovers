@@ -22,6 +22,11 @@ public class PhysicalAttraction {
 	private ClothingStyle clothing_style; // make this an enum?
 	private Level level;
 	private Level fitness;
+	private Level nice_eyes;
+	private Level nice_smile;
+	private Level nice_smell;
+	private Level nice_jawline;
+	
 	// change to use non-numeric variables
 	public PhysicalAttraction(Level level) {
 		this.level = level;
