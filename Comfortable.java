@@ -6,10 +6,11 @@ public class Comfortable {
      //
      //
 
-     //  change to non-numerical variable
-     private int level;
+     //low = awkward, high = sincere
+     private Level level;
+     private Level judgemental
 
-     public Comfortable(int level) {
+     public Comfortable(Level level) {
         this.level = level;
      }
 

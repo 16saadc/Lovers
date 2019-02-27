@@ -18,7 +18,7 @@ public class PhysicalAttraction {
 	// Nice smile {no, yes}
 
 
-
+	// THIS IS AN ENUM NOW.... 
 	private ClothingStyle clothing_style; // make this an enum?
 	private Level level;
 	private Level fitness;
