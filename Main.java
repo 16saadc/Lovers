@@ -13,6 +13,8 @@ public class Main {
         PhysicalAttraction lowPhysicalAttraction = new PhysicalAttraction(Level.LOW);
 
 
+
+
         // Confidence highConfidence = new Confidence(Level.HIGH);
         // Confidence lowConfidence = new Confidence(Level.LOW);
 
