@@ -22,26 +22,63 @@ public class PotentialMate {
 
    private Attraction attraction;
    private String name;
+   private ShownInterest interest;
+   private Confidence confidence;
+   private SocialStatus socialStatus;
    //Comfortable comfortable;
 
-   // just goign to use attraction for now
-   public PotentialMate(Attraction attraction, String name) {
+    /**
+    * potential mate we are assessing
+    *
+    * @param  attraction [level of physical and personality attraction]
+    * @param  interest   [how much interest they show in me]
+    * @param  name       [their name]
+    */
+    public PotentialMate(Attraction attraction, ShownInterest interest, Confidence confidence,
+        SocialStatus socialStatus, String name) {
          //comfortable = new Comfortable();
          this.attraction = attraction;
          this.name = name;
-   }
+         this.confidence = confidence;
+         this.interest = interest;
+         this.socialStatus = socialStatus;
+    }
 
-   public Attraction getAttraction() {
+    public Attraction getAttraction() {
        return attraction;
-   }
+    }
 
-   public void setAttraction(Attraction attr) {
+    public void setAttraction(Attraction attr) {
        attraction = attr;
-   }
+    }
 
-   public String getName() {
+    public String getName() {
        return name;
-   }
+    }
+
+    public Confidence getConfidence() {
+        return confidence;
+    }
+
+    public void setConfidence(Confidence confidence) {
+        this.confidence = confidence;
+    }
+
+    public ShownInterest getInterest() {
+        return interest;
+    }
+
+    public void setInterest(ShownInterest interest) {
+        this.interest = interest;
+    }
+
+    public SocialStatus getSocialStatus() {
+        return socialStatus;
+    }
+
+    public void setSocialStatus(SocialStatus socialStatus) {
+        this.socialStatus = socialStatus;
+    }
 
    /**
     * methods:
@@ -51,4 +88,9 @@ public class PotentialMate {
     * be stupid
     * make conversation
     */
+
+
+
+
+
 }

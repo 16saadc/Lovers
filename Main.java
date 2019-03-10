@@ -26,10 +26,16 @@ public class Main {
         Attraction low = new Attraction(lowPhysicalAttraction, lowPersonality);
         Attraction goodEverything = new Attraction(highPhysicalAttraction, highPersonality);
 
+        RelationshipStatus singleStatus = new RelationshipStatus(Status.SINGLE, Loyalty.NEVER_CHEAT);
 
-        PotentialMate attractiveMate = new PotentialMate(goodDate, "David");
-        PotentialMate semiAttractive = new PotentialMate(goodHookup, "Katie");
-        PotentialMate notAttractive = new PotentialMate(low, "Paul");
+        ShownInterest averageShownInterest = new ShownInterest(Level.MEDIUM);
+        Confidence averageConfidence = new Confidence(Level.MEDIUM);
+
+        SocialStatus averageSocialStatus = new SocialStatus(Popularity.AVERAGE, Education.AVERAGE_STUDENT, singleStatus);
+
+        PotentialMate attractiveMate = new PotentialMate(goodDate, averageShownInterest, averageConfidence, averageSocialStatus, "David");
+        PotentialMate semiAttractive = new PotentialMate(goodHookup, averageShownInterest, averageConfidence, averageSocialStatus, "Katie");
+        PotentialMate notAttractive = new PotentialMate(low, averageShownInterest, averageConfidence, averageSocialStatus, "Paul");
 
 
         MateFinder mateFinder = new MateFinder(attractiveMate, sober_longTerm);

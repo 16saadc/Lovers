@@ -45,6 +45,7 @@ public class MateFinder {
     public Level getPotentialMatePhysicalAttractiveness() {
         return potentialMate.getAttraction().getPhysicalAttraction().getLevel();
     }
+
     /**
      * methods:
      * assess the candidate's state
@@ -56,16 +57,16 @@ public class MateFinder {
     public Move decide() {
         Level potentialMatePersonality = getPotentialMatePersonality();
         Level potentialMatePhysical = getPotentialMatePhysicalAttractiveness();
-        
+
         //userState is mostly sober
         if (currentState.getSobriety().equals(Sobriety.SOBER) || currentState.getSobriety().equals(Sobriety.TIPSY)) {
             System.out.println("The person is sober or is a little tipsy, there is not conflict --> go to the next method");
             //looking for long term
             if (currentState.getRelationshipGoal().equals(RelationshipGoal.LONG_TERM)) {
                 System.out.println("If the person goal is looking for a long term relationship, there is no conflict --> go to the next method ");
-                if ((potentialMatePersonality.equals(Level.HIGH) || potentialMatePersonality.equals(Level.MEDIUM)) 
+                if ((potentialMatePersonality.equals(Level.HIGH) || potentialMatePersonality.equals(Level.MEDIUM))
                 && potentialMatePhysical.equals(Level.HIGH) || potentialMatePhysical.equals(Level.MEDIUM)) {
-                    System.out.println("If the potential mate has good personality and an average physique or a an average personality and a good physique" 
+                    System.out.println("If the potential mate has good personality and an average physique or a an average personality and a good physique"
                         + ", there is no conflict --> go to the next method");
                     //high personality/physical attractiveness
                     if (!currentState.getEnvironment().equals(Environment.NO_GO)) {
@@ -88,7 +89,7 @@ public class MateFinder {
                                 return Move.FLIRT;
                             }
                         }
-                        //barely know the person, environment isn't perfect, talk to them more 
+                        //barely know the person, environment isn't perfect, talk to them more
                         else {
                             System.out.println("If the person barely knows the potential mate, the environment isn't perfect --> keep talking");
                             return Move.TALK_MORE;
@@ -121,9 +122,9 @@ public class MateFinder {
             } else {
                 System.out.println("If the person is not sure what relationship he is looking for, no conflict --> go to the next method ");
                 //unsure of relationship goal
-                if ((potentialMatePersonality.equals(Level.HIGH) || potentialMatePersonality.equals(Level.MEDIUM)) 
+                if ((potentialMatePersonality.equals(Level.HIGH) || potentialMatePersonality.equals(Level.MEDIUM))
                 && potentialMatePhysical.equals(Level.HIGH) || potentialMatePhysical.equals(Level.MEDIUM)) {
-                      System.out.println("If the potential mate has good personality and an average physique or a an average personality and a good physique" 
+                      System.out.println("If the potential mate has good personality and an average physique or a an average personality and a good physique"
                         + ", there is no conflict --> go to the next method");
                     if (!currentState.getEnvironment().equals(Environment.NO_GO)) {
                         System.out.println("If the environment is not conveninent --> just keep talking ");
@@ -135,11 +136,11 @@ public class MateFinder {
                 else {
                     System.out.println("If none of the previous method conflict -> make a move");
                     return Move.ASK_OUT;
-                }              
-            }    
+                }
+            }
         }
 
-        //userState is intoxicated  
+        //userState is intoxicated
         else {
             //user is drunk
             if (currentState.getSobriety().equals(Sobriety.DRUNK)) {
@@ -147,9 +148,9 @@ public class MateFinder {
                  //looking for long term
                 if (currentState.getRelationshipGoal().equals(RelationshipGoal.LONG_TERM)) {
                     System.out.println("If he is looking for a long term relationship, no conflict --> go to the next method");
-                    if ((potentialMatePersonality.equals(Level.HIGH) || potentialMatePersonality.equals(Level.MEDIUM)) 
+                    if ((potentialMatePersonality.equals(Level.HIGH) || potentialMatePersonality.equals(Level.MEDIUM))
                     && potentialMatePhysical.equals(Level.HIGH) || potentialMatePhysical.equals(Level.MEDIUM)) {
-                          System.out.println("If the potential mate has good personality and an average physique or a an average personality and a good physique" 
+                          System.out.println("If the potential mate has good personality and an average physique or a an average personality and a good physique"
                         + ", there is no conflict --> go to the next method");
                         //high personality/physical attractiveness
                         if (!currentState.getEnvironment().equals(Environment.NO_GO)) {
@@ -165,13 +166,13 @@ public class MateFinder {
                                     System.out.println("If the the environment is inviting --> make a move");
                                     return Move.ASK_OUT;
                                 }
-                            } 
+                            }
                             //environment is good, userState is drunk, flirt more
                             if (currentState.getEnvironment().equals(Environment.INVITING)) {
                                 System.out.println("If the environment is inviting then flirt");
                                 return Move.FLIRT;
                             }
-                            //environment isn't perfect, talk to them more 
+                            //environment isn't perfect, talk to them more
                             else {
                                 System.out.println("If the environment is not perfect --> just keep talking");
                                 return Move.TALK_MORE;
@@ -198,9 +199,9 @@ public class MateFinder {
                         return Move.DO_NOT_APPROACH;
                 } else {
                     //unsure of relationship goal
-                    if ((potentialMatePersonality.equals(Level.HIGH) || potentialMatePersonality.equals(Level.MEDIUM)) 
+                    if ((potentialMatePersonality.equals(Level.HIGH) || potentialMatePersonality.equals(Level.MEDIUM))
                     && potentialMatePhysical.equals(Level.HIGH) || potentialMatePhysical.equals(Level.MEDIUM)) {
-                        System.out.println("If the potential mate has good personality and an average physique or a an average personality and a good physique" 
+                        System.out.println("If the potential mate has good personality and an average physique or a an average personality and a good physique"
                         + ", there is no conflict --> go to the next method");
                         //environment is bad but userState is drunk, so talk more
                         if (currentState.getEnvironment().equals(Environment.NO_GO)) {
@@ -215,7 +216,7 @@ public class MateFinder {
                         System.out.println("the potential mate have a bad physique and the person is drunk --> do not approach");
                         return Move.DO_NOT_APPROACH;
                     }
-                    
+
                 }
             }
             //disregard most social cues when extremely inebriated
@@ -230,7 +231,7 @@ public class MateFinder {
                 }
             }
         }
-        
+
         System.out.println(" --> do not approach");
         return Move.DO_NOT_APPROACH;
 

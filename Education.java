@@ -1,0 +1,3 @@
+public enum Education {
+    INTERESTING_WORK, AVERAGE_STUDENT, FAILING, A_STUDENT;
+}
