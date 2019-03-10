@@ -5,12 +5,9 @@ public class Confidence {
 	// Humility {none, kind of, Tim Tebow}
 
     // will change this to a non-numerical variable
-    private Level level;
-    private Level cocky;
-    private Level humility;
-    private Level dating_experience;
+
     // high = jealous/possesive
-    private Level insecure;
+    private Level level;
 
     public Confidence(Level level) {
         this.level = level;
@@ -23,5 +20,8 @@ public class Confidence {
     public void setConfidenceLevel(Level level) {
         this.level = level;
     }
+
+
+
 
 }
