@@ -25,6 +25,7 @@ public class PotentialMate {
    private ShownInterest interest;
    private Confidence confidence;
    private SocialStatus socialStatus;
+   private Aura aura;
    //Comfortable comfortable;
 
     /**
@@ -35,13 +36,14 @@ public class PotentialMate {
     * @param  name       [their name]
     */
     public PotentialMate(Attraction attraction, ShownInterest interest, Confidence confidence,
-        SocialStatus socialStatus, String name) {
+        SocialStatus socialStatus, Aura aura, String name) {
          //comfortable = new Comfortable();
          this.attraction = attraction;
          this.name = name;
          this.confidence = confidence;
          this.interest = interest;
          this.socialStatus = socialStatus;
+         this.aura = aura;
     }
 
     public Attraction getAttraction() {
@@ -78,6 +80,14 @@ public class PotentialMate {
 
     public void setSocialStatus(SocialStatus socialStatus) {
         this.socialStatus = socialStatus;
+    }
+
+    public Aura getAura() {
+        return aura;
+    }
+
+    public void setAura(Aura aura) {
+        this.aura = aura;
     }
 
    /**

@@ -7,10 +7,6 @@ public class PersonalityAttraction {
 
 
     private Level personalityLevel;
-    private Level humor;
-    // low = childish/mixed signals, high = too serious and straight forward
-    private Level maturity;
-    private Level conversation_ease;
 
     public PersonalityAttraction(Level personalityLevel) {
         this.personalityLevel = personalityLevel;
