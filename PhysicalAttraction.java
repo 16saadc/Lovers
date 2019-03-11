@@ -1,13 +1,5 @@
 
 
-// Possible more detailed enum:
-//
-/*
-enum PhysAttractionLevel {
-	UGLY, CUTE, BEAUTIFUL, HOT, HANDSOME; // etc...
-}
-*/
-
 public class PhysicalAttraction {
 	// Style of clothing / dress {dressed well, dressed sloppily}
 	// Height {short, tall etc.} (important)
@@ -32,6 +24,14 @@ public class PhysicalAttraction {
 	// change to use non-numeric variables
 	public PhysicalAttraction(Level overallLevel) {
 		this.overallLevel = overallLevel;
+	}
+
+	public PhysicalAttraction(BodyAttraction bodyAttraction, FaceAttraction faceAttraction, ClothingStyle clothing_style) {
+		this.bodyAttraction = bodyAttraction;
+		this.faceAttraction = faceAttraction;
+		this.clothing_style = clothing_style;
+
+		calculatePhysicalAttraction();
 	}
 
 	public void setLevel(Level level) {
