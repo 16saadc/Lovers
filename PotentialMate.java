@@ -54,7 +54,42 @@ public class PotentialMate {
         intelligence.calculateIntelligence();
     }
 
+    public void talk_smart() {
+        intelligence.setConvoTopic(ConvoTopic.IMPORTANT_ISSUES);
+        intelligence.calculateIntelligence();
+    }
 
+    public void talk_about_job() {
+        intelligence.setConvoTopic(ConvoTopic.JOBS);
+        intelligence.calculateIntelligence();
+    }
+
+    public void ignoreJoke() {
+        System.out.println(name + " is ignoring my joke, giving off an ignorant aura");
+        aura = Aura.IGNORANT;
+    }
+
+
+
+    public void laughAtJoke() {
+        System.out.println(name + " is boosting my ego by laughing at my jokes");
+        aura = Aura.BOOSTS_MY_EGO;
+    }
+
+    public void holdMyHandOnce() {
+        interest.setPhysicalTouch(Level.MEDIUM);
+        interest.calculateShownInterest();
+    }
+
+    public void touchMyFace() {
+        interes.setPhysicalTouch(Level.HIGH);
+        interest.calculateShownInterest();
+    }
+
+    public void saySomethingPersonal() {
+        interest.setConvoLevel(ConvoTopic.PERSONAL);
+        interest.calculateShownInterest();
+    }
 
 
 
@@ -112,17 +147,6 @@ public class PotentialMate {
     public void setAura(Aura aura) {
         this.aura = aura;
     }
-
-   /**
-    * methods:
-    * show interest
-    * make eye contact
-    * be smart
-    * be stupid
-    * make conversation
-    */
-
-
 
 
 

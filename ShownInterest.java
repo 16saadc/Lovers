@@ -12,7 +12,7 @@ public class ShownInterest {
         this.eyeContact = eyeContact;
         this.conversation = conversation;
 
-        this.shownInterest = calculateInterest(physicalTouch, eyeContact, conversation);
+        this.shownInterest = calculateShownInterest();
         // calculate level
     }
 
@@ -20,8 +20,11 @@ public class ShownInterest {
         this.shownInterest = shownInterest;
     }
 
+
+
+
     // method to calculate level of interest based on interactions
-    private Level calculateInterest(Level physicalTouch, Level eyeContact, ConvoLevel conversation) {
+    private Level calculateShownInterest() {
         if (physicalTouch == Level.HIGH) {
             return Level.HIGH;
         } else if ((eyeContact == Level.HIGH || eyeContact == Level.MEDIUM)
@@ -36,6 +39,18 @@ public class ShownInterest {
         }
     }
 
+
+    public void setPhysicalTouch(Level touch) {
+        physicalTouch = touch;
+    }
+
+    public Level getPhysicalTouch() {
+        return physicalTouch;
+    }
+
+    public void setConvoTopic(ConvoLevel convoLevel) {
+        this.conversation = convoLevel;
+    }
 
 
 }

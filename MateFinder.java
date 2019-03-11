@@ -46,6 +46,19 @@ public class MateFinder {
         return potentialMate.getAttraction().getPhysicalAttraction().getLevel();
     }
 
+    public void drink(int drinks) {
+        if (drinks >= 4) {
+            userState.setSobriety(Sobriety.DRUNK);
+        } else if (drinks >= 8) {
+            userState.setSobriety(Sobriety.BLACKOUT);
+        } else if (drinks >= 2) {
+            userState.setSobriety(Sobriety.TIPSY);
+        } else {
+            userState.setSobriety(Sobriety.SOBER);
+        }
+    }
+
+
     /**
      * methods:
      * assess the candidate's state
