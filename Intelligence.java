@@ -23,7 +23,7 @@ public class Intelligence {
             overallLevel = Level.HIGH;
         } else if (education == Education.AVERAGE_STUDENT && convoTopic == ConvoTopic.IMPORTANT_ISSUES) {
             overallLevel = Level.MEDIUM;
-        } else if (convoTopic == NOT_IMPORTANT && (education == Education.FAILING || education == Education.AVERAGE_STUDENT)) {
+        } else if (convoTopic == ConvoTopic.NOT_IMPORTANT && (education == Education.FAILING || education == Education.AVERAGE_STUDENT)) {
             overallLevel = Level.LOW;
         }
     }

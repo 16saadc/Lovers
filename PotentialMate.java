@@ -82,12 +82,12 @@ public class PotentialMate {
     }
 
     public void touchMyFace() {
-        interes.setPhysicalTouch(Level.HIGH);
+        interest.setPhysicalTouch(Level.HIGH);
         interest.calculateShownInterest();
     }
 
     public void saySomethingPersonal() {
-        interest.setConvoLevel(ConvoTopic.PERSONAL);
+        interest.setConvoLevel(ConvoLevel.PERSONAL);
         interest.calculateShownInterest();
     }
 

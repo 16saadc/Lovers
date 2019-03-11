@@ -48,13 +48,13 @@ public class MateFinder {
 
     public void drink(int drinks) {
         if (drinks >= 4) {
-            userState.setSobriety(Sobriety.DRUNK);
+            currentState.setSobriety(Sobriety.DRUNK);
         } else if (drinks >= 8) {
-            userState.setSobriety(Sobriety.BLACKOUT);
+            currentState.setSobriety(Sobriety.BLACKOUT);
         } else if (drinks >= 2) {
-            userState.setSobriety(Sobriety.TIPSY);
+            currentState.setSobriety(Sobriety.TIPSY);
         } else {
-            userState.setSobriety(Sobriety.SOBER);
+            currentState.setSobriety(Sobriety.SOBER);
         }
     }
 

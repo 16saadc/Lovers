@@ -12,7 +12,7 @@ public class ShownInterest {
         this.eyeContact = eyeContact;
         this.conversation = conversation;
 
-        this.shownInterest = calculateShownInterest();
+        calculateShownInterest();
         // calculate level
     }
 
@@ -24,18 +24,18 @@ public class ShownInterest {
 
 
     // method to calculate level of interest based on interactions
-    private Level calculateShownInterest() {
+    public void calculateShownInterest() {
         if (physicalTouch == Level.HIGH) {
-            return Level.HIGH;
+            shownInterest = Level.HIGH;
         } else if ((eyeContact == Level.HIGH || eyeContact == Level.MEDIUM)
             && (conversation == ConvoLevel.ASKING_LOTS_OF_QUESTIONS || conversation == ConvoLevel.PERSONAL)) {
-            return Level.HIGH;
+            shownInterest = Level.HIGH;
         } else if (conversation == ConvoLevel.SELF_TALK && eyeContact == Level.HIGH) {
-            return Level.HIGH;
+            shownInterest = Level.HIGH;
         } else if (eyeContact == Level.LOW || physicalTouch == Level.LOW) {
-            return Level.LOW;
+            shownInterest = Level.LOW;
         } else {
-            return Level.MEDIUM;
+            shownInterest = Level.MEDIUM;
         }
     }
 
@@ -48,7 +48,7 @@ public class ShownInterest {
         return physicalTouch;
     }
 
-    public void setConvoTopic(ConvoLevel convoLevel) {
+    public void setConvoLevel(ConvoLevel convoLevel) {
         this.conversation = convoLevel;
     }
 
