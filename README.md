@@ -6,4 +6,4 @@
 `MateFinder.java` is the executive schema that implements rules-based logic for decision making.
 
 
-`mateFinder.decide()` will return the optimal mate given the list of potential mates and your parameters
+`mateFinder.decide()` will return the move to make given a potential mate and your parameters

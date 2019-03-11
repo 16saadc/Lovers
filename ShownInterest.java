@@ -48,6 +48,10 @@ public class ShownInterest {
         return physicalTouch;
     }
 
+    public Level getInterestLevel() {
+        return shownInterest;
+    }
+
     public void setConvoLevel(ConvoLevel convoLevel) {
         this.conversation = convoLevel;
     }

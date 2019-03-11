@@ -29,7 +29,10 @@ public class Main {
         RelationshipStatus singleStatus = new RelationshipStatus(Status.SINGLE, Loyalty.NEVER_CHEAT);
 
         ShownInterest averageShownInterest = new ShownInterest(Level.MEDIUM);
+        ShownInterest highShownInterest = new ShownInterest(Level.HIGH);
+
         Confidence averageConfidence = new Confidence(Level.MEDIUM);
+        Confidence highConfidence = new Confidence(Level.HIGH);
 
         Intelligence mediumIntelligence = new Intelligence(Education.AVERAGE_STUDENT, ConvoTopic.IMPORTANT_ISSUES);
 
@@ -38,21 +41,39 @@ public class Main {
         PotentialMate attractiveMate = new PotentialMate(goodDate, averageShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "David");
         PotentialMate semiAttractive = new PotentialMate(goodHookup, averageShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Katie");
         PotentialMate notAttractive = new PotentialMate(low, averageShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Paul");
+        
+        PotentialMate attractiveConfidentMate = new PotentialMate(goodDate, averageShownInterest, highConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Will");
+
+        PotentialMate semiAttractiveWithHighInterest = new PotentialMate(goodHookup, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Vishal");
+        PotentialMate notAttractiveWithHighInterest = new PotentialMate(low, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Vishal");
 
 
         MateFinder mateFinder = new MateFinder(attractiveMate, sober_longTerm);
         MateFinder mateFinder2 = new MateFinder(semiAttractive, drunk_Hookup);
         MateFinder mateFinder3 = new MateFinder(notAttractive, drunk_Uninviting);
+        MateFinder mateFinder4 = new MateFinder(semiAttractiveWithHighInterest, drunk_Hookup);
+        MateFinder mateFinder5 = new MateFinder(notAttractiveWithHighInterest, drunk_Uninviting);
+        MateFinder mateFinder6 = new MateFinder(attractiveConfidentMate, sober_longTerm);
+        MateFinder mateFinder7 = new MateFinder(notAttractive, drunk_Uninviting);
 
 
         //sober, friends with mate, inviting environment, looking for long term, attractive mate:
-        System.out.println(mateFinder.getPotentialMate().getName() + ": " + mateFinder.decide());
+        System.out.println("Decision" + ": " + mateFinder.decide());
 
         //drunk, not looking for long term, inviting environment, attractive mate:
-        System.out.println(mateFinder2.getPotentialMate().getName() + ": " + mateFinder2.decide());
+        System.out.println("Decision" + ": " + mateFinder2.decide());
 
         //drunk, not looking for long term, not a good environment, unattractive mate
-        System.out.println(mateFinder3.getPotentialMate().getName() + ": " + mateFinder3.decide());
+        System.out.println("Decision" + ": " + mateFinder3.decide());
+
+        System.out.println("Decision" + ": " + mateFinder4.decide());
+        System.out.println("Decision" + ": " + mateFinder5.decide());
+        System.out.println("Decision" + ": " + mateFinder6.decide());
+        System.out.println("Decision" + ": " + mateFinder7.decide());
+
+
+
+
 
     }
 }

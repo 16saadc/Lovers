@@ -46,6 +46,10 @@ public class MateFinder {
         return potentialMate.getAttraction().getPhysicalAttraction().getLevel();
     }
 
+    public Level getPotentialMateInterest() {
+        return potentialMate.getInterest().getInterestLevel();
+    }
+
     public void drink(int drinks) {
         if (drinks >= 4) {
             currentState.setSobriety(Sobriety.DRUNK);
@@ -70,6 +74,18 @@ public class MateFinder {
     public Move decide() {
         Level potentialMatePersonality = getPotentialMatePersonality();
         Level potentialMatePhysical = getPotentialMatePhysicalAttractiveness();
+
+        Level shownInterestLevel = getPotentialMateInterest();
+
+        System.out.println("===========");
+        System.out.println("Potential mate: " + potentialMate.getName());
+        System.out.println("Potential mate attractiveness level: " + potentialMatePhysical);
+        System.out.println("Potential mate personality level: " + potentialMatePersonality);
+        System.out.println("Environment: " + currentState.getEnvironment());
+        System.out.println("Potential mate interest level: " + shownInterestLevel);
+
+
+
 
         //userState is mostly sober
         if (currentState.getSobriety().equals(Sobriety.SOBER) || currentState.getSobriety().equals(Sobriety.TIPSY)) {
@@ -104,6 +120,10 @@ public class MateFinder {
                         }
                         //barely know the person, environment isn't perfect, talk to them more
                         else {
+                            if(shownInterestLevel.equals(Level.HIGH)) {
+                                System.out.println("If the mate shows a high level of interest, despite environmental circumstances --> flirt");
+                                return Move.FLIRT;
+                            }
                             System.out.println("If the person barely knows the potential mate, the environment isn't perfect --> keep talking");
                             return Move.TALK_MORE;
                         }
@@ -140,6 +160,10 @@ public class MateFinder {
                       System.out.println("If the potential mate has good personality and an average physique or a an average personality and a good physique"
                         + ", there is no conflict --> go to the next method");
                     if (!currentState.getEnvironment().equals(Environment.NO_GO)) {
+                        if(shownInterestLevel.equals(Level.HIGH)) {
+                            System.out.println("If the mate shows a high level of interest, despite environmental circumstances --> flirt");
+                            return Move.FLIRT;
+                        }
                         System.out.println("If the environment is not conveninent --> just keep talking ");
                         return Move.TALK_MORE;
                     }
@@ -187,9 +211,17 @@ public class MateFinder {
                             }
                             //environment isn't perfect, talk to them more
                             else {
+                                if(shownInterestLevel.equals(Level.HIGH)) {
+                                    System.out.println("If the mate shows a high level of interest, despite environmental circumstances --> flirt");
+                                    return Move.FLIRT;
+                                }
                                 System.out.println("If the environment is not perfect --> just keep talking");
                                 return Move.TALK_MORE;
                             }
+                        }
+                        if(shownInterestLevel.equals(Level.HIGH)) {
+                            System.out.println("If the mate shows a high level of interest, despite environmental circumstances --> talk more");
+                            return Move.TALK_MORE;
                         }
                         //environment is a no go so don't approach
                         System.out.println("The environment is not appropriate --> do not make a move");
@@ -236,6 +268,10 @@ public class MateFinder {
             if (currentState.getSobriety().equals(Sobriety.BLACKOUT)) {
                 System.out.println("if the person is totally blacked out, he will definetly make a move --> go to next method");
                 if (currentState.getEnvironment().equals(Environment.NO_GO)) {
+                    if(shownInterestLevel.equals(Level.HIGH)) {
+                        System.out.println("If the mate shows a high level of interest, despite environmental circumstances --> flirt");
+                        return Move.FLIRT;
+                    }
                     System.out.println("if the environment is bad --> talk more");
                     return Move.TALK_MORE;
                 } else {
