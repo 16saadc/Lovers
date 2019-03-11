@@ -26,6 +26,7 @@ public class PotentialMate {
    private Confidence confidence;
    private SocialStatus socialStatus;
    private Aura aura;
+   private Intelligence intelligence;
    //Comfortable comfortable;
 
     /**
@@ -36,7 +37,7 @@ public class PotentialMate {
     * @param  name       [their name]
     */
     public PotentialMate(Attraction attraction, ShownInterest interest, Confidence confidence,
-        SocialStatus socialStatus, Aura aura, String name) {
+        SocialStatus socialStatus, Aura aura, Intelligence intelligence, String name) {
          //comfortable = new Comfortable();
          this.attraction = attraction;
          this.name = name;
@@ -45,6 +46,28 @@ public class PotentialMate {
          this.socialStatus = socialStatus;
          this.aura = aura;
     }
+
+
+
+    public void talk_stupid() {
+        intelligence.setConvoTopic(ConvoTopic.NOT_IMPORTANT);
+        intelligence.calculateIntelligence();
+    }
+
+
+
+
+
+
+
+    public void setIntelligence(Intelligence intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public Intelligence getIntelligence() {
+        return intelligence;
+    }
+
 
     public Attraction getAttraction() {
        return attraction;
