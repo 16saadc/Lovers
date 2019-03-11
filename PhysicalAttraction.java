@@ -20,18 +20,14 @@ public class PhysicalAttraction {
 
 	// THIS IS AN ENUM NOW....
 	private ClothingStyle clothing_style; // make this an enum?
+	private FaceAttraction faceAttraction;
+	private BodyAttraction bodyAttraction;
 	private Level overallLevel;
 	private Level body;
 	private Level face;
 
 
-	private Level nice_eyes;
-	private Level nice_smile;
-	private Level nice_smell;
-	private Level nice_jawline;
-	private Level fat;
-	private Level muscle;
-	private Level hair_attraction;
+
 
 	// change to use non-numeric variables
 	public PhysicalAttraction(Level overallLevel) {
@@ -47,6 +43,10 @@ public class PhysicalAttraction {
 	}
 
 	public void calculateFaceAttraction() {
+		Level nice_eyes = faceAttraction.getEyes();
+		Level nice_smile = faceAttraction.getSmile();
+		Level nice_jawline = faceAttraction.getJawline();
+
 		if (nice_eyes == Level.HIGH && nice_smile == Level.HIGH) {
 			face = Level.HIGH;
 		} else if (nice_eyes == Level.HIGH && nice_jawline == Level.HIGH) {
@@ -65,6 +65,10 @@ public class PhysicalAttraction {
 	}
 
 	public void calculateBodyAttraction() {
+		Level muscle = bodyAttraction.getMuscle();
+		Level hair_attraction = bodyAttraction.getHair();
+		Level fat = bodyAttraction.getFat();
+
 		if (muscle == Level.HIGH && fat == Level.LOW) {
 			body = Level.HIGH;
 		} else if (muscle == Level.HIGH && hair_attraction == Level.HIGH) {
