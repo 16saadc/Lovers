@@ -3,6 +3,15 @@ import java.util.ArrayList;
 
 public class Main {
 
+    public static int confidenceImportance = 0;
+    public static int physicalAttractionImportance = 0;
+    public static int socialStatusImportance = 0;
+    public static int auraImportance = 0;
+    public static int intelligenceImportance = 0;
+    public static int personalityImportance = 0;
+
+
+
     public static void main(String[] args) {
 
         UserState sober_longTerm = new UserState(RelationshipGoal.LONG_TERM, Sobriety.SOBER, MateState.FRIENDS, Environment.INVITING);
@@ -41,7 +50,7 @@ public class Main {
         PotentialMate attractiveMate = new PotentialMate(goodDate, averageShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "David");
         PotentialMate semiAttractive = new PotentialMate(goodHookup, averageShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Katie");
         PotentialMate notAttractive = new PotentialMate(low, averageShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Paul");
-        
+
         PotentialMate attractiveConfidentMate = new PotentialMate(goodDate, averageShownInterest, highConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Will");
 
         PotentialMate semiAttractiveWithHighInterest = new PotentialMate(goodHookup, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Vishal");
