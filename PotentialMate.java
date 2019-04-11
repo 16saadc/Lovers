@@ -47,7 +47,7 @@ public class PotentialMate {
          this.aura = aura;
     }
 
-
+// Mate Methods -------------------------------------------
 
     public void talk_stupid() {
         intelligence.setConvoTopic(ConvoTopic.NOT_IMPORTANT);
@@ -64,6 +64,7 @@ public class PotentialMate {
         intelligence.calculateIntelligence();
     }
 
+
     public void ignoreJoke() {
         System.out.println(name + " is ignoring my joke, giving off an ignorant aura");
         aura = Aura.IGNORANT;
@@ -75,6 +76,7 @@ public class PotentialMate {
         System.out.println(name + " is boosting my ego by laughing at my jokes");
         aura = Aura.BOOSTS_MY_EGO;
     }
+
 
     public void holdMyHandOnce() {
         interest.setPhysicalTouch(Level.MEDIUM);
@@ -94,6 +96,9 @@ public class PotentialMate {
 
 
 
+
+
+// Setters and Getters ------------------------------------
 
     public void setIntelligence(Intelligence intelligence) {
         this.intelligence = intelligence;
