@@ -14,6 +14,17 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //
+        // create a for loop to go through all potential mates
+        // Move move = mate.decide()
+        // updateImportance(mate, move)
+        //     maybe look at last 3 - 5 mates to update importances?
+        //
+        //     possibly tie emotion into importance -- if something specific makes you happy, make it more important
+
+
+
+
         UserState sober_longTerm = new UserState(RelationshipGoal.LONG_TERM, Sobriety.SOBER, MateState.FRIENDS, Environment.INVITING);
         UserState drunk_Hookup = new UserState(RelationshipGoal.ONE_NIGHT, Sobriety.DRUNK, MateState.FAMILIAR, Environment.INVITING);
         UserState drunk_Uninviting = new UserState(RelationshipGoal.ONE_NIGHT, Sobriety.DRUNK, MateState.FAMILIAR, Environment.NO_GO);
