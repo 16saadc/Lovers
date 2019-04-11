@@ -1,0 +1,42 @@
+"states": [{
+	"state1": {
+		"currentState": {
+			"goal":"LONG_TERM",  //LONG_TERM, ONE_NIGHT, UNSURE
+			"sobriety":"SOBER",  // SOBER, TIPSY, DRUNK, BLACKOUT
+			"mateState":"ALREADY_CRUSH",  //NEVER_MET, FRIENDS, FAMILIAR, ALREADY_CRUSH
+			"environment":"INVITING",  //NO_GO, BE_CONFIDENT, INVITING, DEFINITELY
+			},
+		},
+	"state2": {
+		"currentState": {
+			"goal":"ONE_NIGHT",  //LONG_TERM, ONE_NIGHT, UNSURE
+			"sobriety":"DRUNK",  // SOBER, TIPSY, DRUNK, BLACKOUT
+			"mateState":"FRIENDS",  //NEVER_MET, FRIENDS, FAMILIAR, ALREADY_CRUSH
+			"environment":"DEFINITELY",  //NO_GO, BE_CONFIDENT, INVITING, DEFINITELY
+			},
+		},
+	"state3": {
+		"currentState": {
+			"goal":"ONE_NIGHT",  //LONG_TERM, ONE_NIGHT, UNSURE
+			"sobriety":"DRUNK",  // SOBER, TIPSY, DRUNK, BLACKOUT
+			"mateState":"NEVER_MET",  //NEVER_MET, FRIENDS, FAMILIAR, ALREADY_CRUSH
+			"environment":"NO_GO",  //NO_GO, BE_CONFIDENT, INVITING, DEFINITELY
+			},
+		},
+	"state4": {
+		"currentState": {
+			"goal":"UNSURE",  //LONG_TERM, ONE_NIGHT, UNSURE
+			"sobriety":"TIPSY",  // SOBER, TIPSY, DRUNK, BLACKOUT
+			"mateState":"FAMILIAR",  //NEVER_MET, FRIENDS, FAMILIAR, ALREADY_CRUSH
+			"environment":"BE_CONFIDENT",  //NO_GO, BE_CONFIDENT, INVITING, DEFINITELY
+			},
+		},
+	"state5": {
+		"currentState": {
+			"goal":"LONG_TERM",  //LONG_TERM, ONE_NIGHT, UNSURE
+			"sobriety":"BLACKOUT",  // SOBER, TIPSY, DRUNK, BLACKOUT
+			"mateState":"FRIENDS",  //NEVER_MET, FRIENDS, FAMILIAR, ALREADY_CRUSH
+			"environment":"NO_GO",  //NO_GO, BE_CONFIDENT, INVITING, DEFINITELY
+			},
+		}		
+	}]
