@@ -1,8 +1,9 @@
 public class Emotion {
-	
 
-	private EmotionalState dominantEmotion
-	private EmotionalState secondaryEmotion
+
+	private EmotionalState dominantEmotion;
+	private EmotionalState secondaryEmotion;
+	private EmotionalState tertiaryEmotion;
 
 	public Emotion(EmotionalState dominantEmotion, EmotionalState secondaryEmotion, EmotionalState tertiaryEmotion) {
 		this.dominantEmotion = dominantEmotion;
@@ -11,20 +12,20 @@ public class Emotion {
 	}
 
 	public void setEmotion(EmotionalState dominantEmotion, EmotionalState secondaryEmotion, EmotionalState tertiaryEmotion) {
-		this.domninantEmotion = dominantEmotion;
+		this.dominantEmotion = dominantEmotion;
 		this.secondaryEmotion = secondaryEmotion;
 		this.tertiaryEmotion = tertiaryEmotion;
 	}
 
-	public void getDominatEmotion() {
+	public EmotionalState getDominatEmotion() {
 		return dominantEmotion;
 	}
 
-	public void getSecondaryEmotion() {
+	public EmotionalState getSecondaryEmotion() {
 		return secondaryEmotion;
 	}
 
-	public void getTertiaryEmotion() {
+	public EmotionalState getTertiaryEmotion() {
 		return tertiaryEmotion;
 	}
 }
