@@ -66,15 +66,17 @@ public class PotentialMate {
 
 
     public void ignoreJoke() {
-        System.out.println(name + " is ignoring my joke, giving off an ignorant aura");
+        System.out.println(name + " is ignoring my joke, giving off an ignorant aura. This also makes me slightly sad");
         aura = Aura.IGNORANT;
+        //System.
+        Main.updateEmotion(EmotionalState.SAD, Level.LOW);
     }
 
 
-
     public void laughAtJoke() {
-        System.out.println(name + " is boosting my ego by laughing at my jokes");
+        System.out.println(name + " is boosting my ego by laughing at my jokes. This makes me happier");
         aura = Aura.BOOSTS_MY_EGO;
+
     }
 
 

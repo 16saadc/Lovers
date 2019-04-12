@@ -17,7 +17,7 @@ public class Emotion {
 		this.tertiaryEmotion = tertiaryEmotion;
 	}
 
-	public EmotionalState getDominatEmotion() {
+	public EmotionalState getDominantEmotion() {
 		return dominantEmotion;
 	}
 
@@ -27,5 +27,17 @@ public class Emotion {
 
 	public EmotionalState getTertiaryEmotion() {
 		return tertiaryEmotion;
+	}
+
+	public void setDominantEmotion(EmotionalState emotion) {
+		dominantEmotion = emotion;
+	}
+
+	public void setSecondaryEmotion(EmotionalState emotion) {
+		secondaryEmotion = emotion;
+	}
+
+	public void setTertiaryEmotion(EmotionalState emotion) {
+		tertiaryEmotion = emotion;
 	}
 }

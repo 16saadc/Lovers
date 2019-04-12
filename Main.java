@@ -12,8 +12,13 @@ public class Main {
     public static int intelligenceImportance = 0;
     public static int personalityImportance = 0;
 
+    public static Emotion emotion;
 
     public static void main(String[] args) {
+
+        // START WITH INITIAL NEUTRAL EMOTION
+        emotion = new Emotion(EmotionalState.NEUTRAL, EmotionalState.NEUTRAL, EmotionalState.NEUTRAL);
+
 
 
         //
@@ -95,7 +100,61 @@ public class Main {
 
 
 
+    }
 
 
+    public static void updateEmotion(EmotionalState newEmotion, Level level) {
+        EmotionalState currDominant = Main.emotion.getDominantEmotion();
+        EmotionalState currSecondary = Main.emotion.getSecondaryEmotion();
+        EmotionalState currTertiary = Main.emotion.getTertiaryEmotion();
+
+        if (currDominant == newEmotion) {
+                System.out.println("this emotion is already dominant, so nothing changes");
+                return;
+        }
+        if (level == Level.HIGH) {
+            if (currSecondary == newEmotion) {
+                System.out.println("this emotion is my new dominant emotion. It will switch with my old primary emotion");
+                Main.emotion.setSecondaryEmotion(currDominant);
+                Main.emotion.setDominantEmotion(newEmotion);
+            } else {
+                System.out.println("this emotion is my new dominant emotion. My current primary and secondary emotions will get bumped back");
+
+                Main.emotion.setSecondaryEmotion(currDominant);
+                Main.emotion.setDominantEmotion(newEmotion);
+                Main.emotion.setTertiaryEmotion(currSecondary);
+            }
+        } else if (level == Level.MEDIUM) {
+            // bump to first if its dominant, secondary, or tertiary
+            if (currTertiary == newEmotion || currSecondary == newEmotion || currDominant == newEmotion) {
+                System.out.println("this emotion is already felt --> set it to dominant");
+                Main.emotion.setSecondaryEmotion(currDominant);
+                Main.emotion.setDominantEmotion(newEmotion);
+                Main.emotion.setTertiaryEmotion(currSecondary);
+            } else {
+                System.out.println("this emotion is not yet felt --> medium influence so it is now a secondary emotion");
+                Main.emotion.setTertiaryEmotion(currSecondary);
+                Main.emotion.setSecondaryEmotion(newEmotion);
+            }
+        } else if (level == Level.LOW) {
+            // Move up one place if already felt. If not, make it tertiary
+            if (currDominant == newEmotion) {
+                System.out.println("this emotion is already dominant --> leave it as is");
+                return;
+            }
+            if (currTertiary == newEmotion) {
+                System.out.println("this emotion is already tertiary --> set it to secondary, bump up old secondary emotion to tertiary");
+                Main.emotion.setTertiaryEmotion(currSecondary);
+                Main.emotion.setSecondaryEmotion(newEmotion);
+            } else if (currSecondary == newEmotion) {
+                System.out.println("this emotion is already secondary --> set it to dominant, and bump the old dominant and secondary emotions down");
+                Main.emotion.setSecondaryEmotion(currDominant);
+                Main.emotion.setTertiaryEmotion(currSecondary);
+                Main.emotion.setDominantEmotion(newEmotion);
+            } else {
+                System.out.println("this emotion is not yet felt --> low influence so it is now a tertiary emotion");
+                Main.emotion.setTertiaryEmotion(newEmotion);
+            }
+        }
     }
 }
