@@ -111,7 +111,7 @@ public class Main {
         UserState userState = matefinder.getCurrentState();
         Level currPersonality = matefinder.getPotentialMatePersonality();
         Level currPhysical = matefinder.getPotentialMatePhysicalAttractiveness();
-        Level currIntelligence = matefinder.getPotentialMate().getIntelligence().getOverallLevel();
+        //Level currIntelligence = matefinder.getPotentialMate().getIntelligence().getOverallLevel();
         RelationshipGoal currRelGoal = userState.getRelationshipGoal();
         Level currConfidence = matefinder.getPotentialMate().getConfidence().getLevel();
         SocialStatus currSocialStatus = matefinder.getPotentialMate().getSocialStatus();
@@ -133,13 +133,13 @@ public class Main {
                 System.out.println("LEARNING: low physical and made move --> decrease physical importance");
                 physicalAttractionImportance -= 1;
             }
-            if (currIntelligence == Level.HIGH) {
-                System.out.println("LEARNING: high intelligence and made move --> increase intelligence importance");
-                intelligenceImportance += 1;
-            } else if (currIntelligence == Level.LOW) {
-                System.out.println("LEARNING: low intelligence but made move --> decrease intelligence importance");
-                intelligenceImportance -= 1;
-            }
+            // if (currIntelligence == Level.HIGH) {
+            //     System.out.println("LEARNING: high intelligence and made move --> increase intelligence importance");
+            //     intelligenceImportance += 1;
+            // } else if (currIntelligence == Level.LOW) {
+            //     System.out.println("LEARNING: low intelligence but made move --> decrease intelligence importance");
+            //     intelligenceImportance -= 1;
+            // }
 
             if (currRelGoal == RelationshipGoal.ONE_NIGHT) {
                 System.out.println("LEARNING: my relationship goal contradicts my move --> decrease relationship goal importance");
@@ -185,13 +185,13 @@ public class Main {
                 System.out.println("LEARNING: low physical and no move --> increase physical importance");
                 physicalAttractionImportance += 1;
             }
-            if (currIntelligence == Level.HIGH) {
-                System.out.println("LEARNING: high intelligence and no move --> decrease intelligence importance");
-                intelligenceImportance -= 1;
-            } else if (currIntelligence == Level.LOW) {
-                System.out.println("LEARNING: low intelligence but no move --> increase intelligence importance");
-                intelligenceImportance += 1;
-            }
+            // if (currIntelligence == Level.HIGH) {
+            //     System.out.println("LEARNING: high intelligence and no move --> decrease intelligence importance");
+            //     intelligenceImportance -= 1;
+            // } else if (currIntelligence == Level.LOW) {
+            //     System.out.println("LEARNING: low intelligence but no move --> increase intelligence importance");
+            //     intelligenceImportance += 1;
+            // }
 
             if (currRelGoal == RelationshipGoal.ONE_NIGHT) {
                 System.out.println("LEARNING: my relationship goal supports my move --> increase relationship goal importance");
