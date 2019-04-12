@@ -20,11 +20,11 @@ public class Emotion {
 		return dominantEmotion;
 	}
 
-	public void secondaryEmotion() {
+	public void getSecondaryEmotion() {
 		return secondaryEmotion;
 	}
 
-	public void secondaryEmotion() {
+	public void getTertiaryEmotion() {
 		return tertiaryEmotion;
 	}
 }
