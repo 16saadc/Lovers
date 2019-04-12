@@ -52,11 +52,15 @@ public class PotentialMate {
     public void talk_stupid() {
         intelligence.setConvoTopic(ConvoTopic.NOT_IMPORTANT);
         intelligence.calculateIntelligence();
+        Main.updateEmotion(EmotionalState.BORED, Level.MEDIUM);
+        System.out.println("Conversation was stupid --> medium level of boredom");
     }
 
     public void talk_smart() {
         intelligence.setConvoTopic(ConvoTopic.IMPORTANT_ISSUES);
         intelligence.calculateIntelligence();
+        Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
+        System.out.println("Had a smart conversation --> increased impressed emotion");
     }
 
     public void talk_about_job() {
@@ -76,6 +80,7 @@ public class PotentialMate {
     public void laughAtJoke() {
         System.out.println(name + " is boosting my ego by laughing at my jokes. This makes me happier");
         aura = Aura.BOOSTS_MY_EGO;
+        Main.updateEmotion(EmotionalState.HAPPY, Level.LOW);
 
     }
 
@@ -88,11 +93,22 @@ public class PotentialMate {
     public void touchMyFace() {
         interest.setPhysicalTouch(Level.HIGH);
         interest.calculateShownInterest();
+
     }
 
     public void saySomethingPersonal() {
         interest.setConvoLevel(ConvoLevel.PERSONAL);
         interest.calculateShownInterest();
+    }
+
+    public void insult() {;
+        System.out.println("Potential mate insulted me --> high level of anger");
+        Main.updateEmotion(EmotionalState.ANGRY, Level.HIGH);
+    }
+
+    public void compliment() {
+        System.out.println("Potential mate complimented me --> high level of happiness");
+        Main.updateEmotion(EmotionalState.HAPPY, Level.HIGH);
     }
 
 

@@ -98,8 +98,6 @@ public class Main {
         System.out.println("Decision" + ": " + mateFinder6.decide());
         System.out.println("Decision" + ": " + mateFinder7.decide());
 
-
-
     }
 
 
