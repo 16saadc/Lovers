@@ -1,4 +1,6 @@
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PotentialMate {
 
     // Current attractiveness to me: {gross, eh, maybe, mhmmm, hot damn, zayummm}

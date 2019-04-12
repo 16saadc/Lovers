@@ -1,3 +1,5 @@
+
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -11,8 +13,8 @@ public class Main {
     public static int personalityImportance = 0;
 
 
-
     public static void main(String[] args) {
+
 
         //
         // create a for loop to go through all potential mates
