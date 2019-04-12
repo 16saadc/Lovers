@@ -1,0 +1,4 @@
+public enum EmotionalState {
+		HAPPY, SAD, ANGRY, EXCITED, AROUSED, BORED, CONFUSED, IMPRESSED
+
+}
