@@ -102,8 +102,9 @@ public class PotentialMate {
     }
 
     public void insult() {;
-        System.out.println("Potential mate insulted me --> high level of anger");
+        System.out.println("Potential mate insulted me --> high level of anger, slight increase of sadness");
         Main.updateEmotion(EmotionalState.ANGRY, Level.HIGH);
+        Main.updateEmotion(EmotionalState.SAD, Level.LOW);
     }
 
     public void compliment() {

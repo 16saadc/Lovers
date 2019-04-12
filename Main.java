@@ -11,6 +11,7 @@ public class Main {
     public static int auraImportance = 0;
     public static int intelligenceImportance = 0;
     public static int personalityImportance = 0;
+    public static int relationshipGoalImportance = 0;
 
     public static Emotion emotion;
 
@@ -101,22 +102,97 @@ public class Main {
     }
 
 
+    public static void adjustImportances(Move move, MateFinder matefinder, UserState userState) {
+        // curr personality
+        // curr physical
+        // curr intelligence
+        // curr relationshipGoal
+        // curr confidence
+        // curr social statu
+        // curr aura
+
+        Level currPersonality = matefinder.getPotentialMatePersonality();
+        Level currPhysical = matefinder.getPotentialMatePhysicalAttractiveness();
+        Level currIntelligence = matefinder.getPotentialMate().getIntelligence().getOverallLevel();
+        RelationshipGoal currRelGoal = userState.getRelationshipGoal();
+        Level currConfidence = matefinder.getPotentialMate().getConfidence().getLevel();
+        SocialStatus currSocialStatus = matefinder.getPotentialMate().getSocialStatus();
+        Aura currAura = matefinder.getPotentialMate().getAura();
+
+
+        if (move == Move.ASK_OUT) {
+            if (currPersonality == Level.HIGH) {
+                System.out.println("LEARNING: high personality and made move --> increase personality importance");
+                personalityImportance += 1;
+            } else if (currPersonality == Level.LOW) {
+                System.out.println("LEARNING: low personality and made move --> decrease personality importance");
+                personalityImportance -= 1;
+            }
+            if (currPhysical == Level.HIGH) {
+                System.out.println("LEARNING: high physical and made move --> increase physical importance");
+                physicalAttractionImportance += 1;
+            } else if (currPhysical == Level.LOW) {
+                System.out.println("LEARNING: low physical and made move --> decrease physical importance");
+                physicalAttractionImportance -= 1;
+            }
+            if (currIntelligence == Level.HIGH) {
+                System.out.println("LEARNING: high intelligence and made move --> increase intelligence importance");
+                intelligenceImportance += 1;
+            } else if (currIntelligence == Level.LOW) {
+                System.out.println("LEARNING: low intelligence but made move --> decrease intelligence importance");
+                intelligenceImportance -= 1;
+            }
+
+            if (currRelGoal == RelationshipGoal.ONE_NIGHT) {
+                System.out.println("LEARNING: my relationship goal contradicts my move --> decrease relationship goal importance");
+                relationshipGoalImportance -= 1;
+            } else if (currRelGoal == RelationshipGoal.LONG_TERM) {
+                System.out.println("LEARNING: my relationship goal supports my move --> increase relationship goal importance");
+                relationshipGoalImportance += 1;
+            }
+
+
+            if (currConfidence == Level.HIGH) {
+                System.out.println("LEARNING: high confidence and made move --> increase confidence importance");
+                confidenceImportance += 1;
+            } else if (currConfidence == Level.LOW) {
+                System.out.println("LEARNING: low confidence and made move --> decrease confidence importance");
+                confidenceImportance -= 1;
+            }
+
+
+            //if (currSocialStatus = )
+            //
+
+
+            if (currAura == Aura.TALKS_DOWN || currAura == Aura.AWKWARD || currAura == Aura.IGNORANT) {
+                System.out.println("LEARNING: bad aura and made move --> decrease aura importance");
+                auraImportance -= 1;
+            } else if (currAura == Aura.BOOSTS_MY_EGO) {
+                System.out.println("LEARNING: good aura and made move --> increase aura importance");
+                auraImportance += 1;
+            }
+        }
+    }
+
+
+
     public static void updateEmotion(EmotionalState newEmotion, Level level) {
         EmotionalState currDominant = Main.emotion.getDominantEmotion();
         EmotionalState currSecondary = Main.emotion.getSecondaryEmotion();
         EmotionalState currTertiary = Main.emotion.getTertiaryEmotion();
 
         if (currDominant == newEmotion) {
-                System.out.println("this emotion is already dominant, so nothing changes");
+                System.out.println("EMOTION: this emotion is already dominant, so nothing changes");
                 return;
         }
         if (level == Level.HIGH) {
             if (currSecondary == newEmotion) {
-                System.out.println("this emotion is my new dominant emotion. It will switch with my old primary emotion");
+                System.out.println("EMOTION: this emotion is my new dominant emotion. It will switch with my old primary emotion");
                 Main.emotion.setSecondaryEmotion(currDominant);
                 Main.emotion.setDominantEmotion(newEmotion);
             } else {
-                System.out.println("this emotion is my new dominant emotion. My current primary and secondary emotions will get bumped back");
+                System.out.println("EMOTION: this emotion is my new dominant emotion. My current primary and secondary emotions will get bumped back");
 
                 Main.emotion.setSecondaryEmotion(currDominant);
                 Main.emotion.setDominantEmotion(newEmotion);
@@ -125,34 +201,35 @@ public class Main {
         } else if (level == Level.MEDIUM) {
             // bump to first if its dominant, secondary, or tertiary
             if (currTertiary == newEmotion || currSecondary == newEmotion || currDominant == newEmotion) {
-                System.out.println("this emotion is already felt --> set it to dominant");
+                System.out.println("EMOTION: this emotion is already felt --> set it to dominant");
                 Main.emotion.setSecondaryEmotion(currDominant);
                 Main.emotion.setDominantEmotion(newEmotion);
                 Main.emotion.setTertiaryEmotion(currSecondary);
             } else {
-                System.out.println("this emotion is not yet felt --> medium influence so it is now a secondary emotion");
+                System.out.println("EMOTION: this emotion is not yet felt --> medium influence so it is now a secondary emotion");
                 Main.emotion.setTertiaryEmotion(currSecondary);
                 Main.emotion.setSecondaryEmotion(newEmotion);
             }
         } else if (level == Level.LOW) {
             // Move up one place if already felt. If not, make it tertiary
             if (currDominant == newEmotion) {
-                System.out.println("this emotion is already dominant --> leave it as is");
+                System.out.println("EMOTION: this emotion is already dominant --> leave it as is");
                 return;
             }
             if (currTertiary == newEmotion) {
-                System.out.println("this emotion is already tertiary --> set it to secondary, bump up old secondary emotion to tertiary");
+                System.out.println("EMOTION: this emotion is already tertiary --> set it to secondary, bump up old secondary emotion to tertiary");
                 Main.emotion.setTertiaryEmotion(currSecondary);
                 Main.emotion.setSecondaryEmotion(newEmotion);
             } else if (currSecondary == newEmotion) {
-                System.out.println("this emotion is already secondary --> set it to dominant, and bump the old dominant and secondary emotions down");
+                System.out.println("EMOTION: this emotion is already secondary --> set it to dominant, and bump the old dominant and secondary emotions down");
                 Main.emotion.setSecondaryEmotion(currDominant);
                 Main.emotion.setTertiaryEmotion(currSecondary);
                 Main.emotion.setDominantEmotion(newEmotion);
             } else {
-                System.out.println("this emotion is not yet felt --> low influence so it is now a tertiary emotion");
+                System.out.println("EMOTION: this emotion is not yet felt --> low influence so it is now a tertiary emotion");
                 Main.emotion.setTertiaryEmotion(newEmotion);
             }
         }
     }
+
 }

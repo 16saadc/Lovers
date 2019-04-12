@@ -43,4 +43,8 @@ public class Intelligence {
     public ConvoTopic getConvoTopic() {
         return convoTopic;
     }
+
+    public Level getOverallLevel() {
+        return overallLevel;
+    }
 }
