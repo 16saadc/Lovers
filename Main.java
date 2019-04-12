@@ -14,6 +14,7 @@ public class Main {
     public static int relationshipGoalImportance = 0;
 
     public static Emotion emotion;
+    public static UserState currentUserState;
 
     public static void main(String[] args) {
 
@@ -86,8 +87,11 @@ public class Main {
 
 
         //sober, friends with mate, inviting environment, looking for long term, attractive mate:
-        System.out.println("Decision" + ": " + mateFinder.decide());
 
+
+        System.out.println("Decision:");
+        Move move = mateFinder.decide();
+        adjustImportances(move, mateFinder);
         //drunk, not looking for long term, inviting environment, attractive mate:
         System.out.println("Decision" + ": " + mateFinder2.decide());
 
@@ -102,15 +106,9 @@ public class Main {
     }
 
 
-    public static void adjustImportances(Move move, MateFinder matefinder, UserState userState) {
-        // curr personality
-        // curr physical
-        // curr intelligence
-        // curr relationshipGoal
-        // curr confidence
-        // curr social statu
-        // curr aura
+    public static void adjustImportances(Move move, MateFinder matefinder) {
 
+        UserState userState = matefinder.getCurrentState();
         Level currPersonality = matefinder.getPotentialMatePersonality();
         Level currPhysical = matefinder.getPotentialMatePhysicalAttractiveness();
         Level currIntelligence = matefinder.getPotentialMate().getIntelligence().getOverallLevel();

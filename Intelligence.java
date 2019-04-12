@@ -11,21 +11,21 @@ public class Intelligence {
     public Intelligence(Education education, ConvoTopic convoTopic) {
         this.education = education;
         this.convoTopic = convoTopic;
-
-        calculateIntelligence();
+        this.overallLevel = calculateIntelligence();
 
     }
 
-    public void calculateIntelligence() {
+    public Level calculateIntelligence() {
         if (education == Education.FAILING) {
-            overallLevel = Level.LOW;
+            return Level.LOW;
         } else if (education == Education.A_STUDENT || education == Education.INTERESTING_WORK) {
-            overallLevel = Level.HIGH;
+            return Level.HIGH;
         } else if (education == Education.AVERAGE_STUDENT && convoTopic == ConvoTopic.IMPORTANT_ISSUES) {
-            overallLevel = Level.MEDIUM;
+            return Level.MEDIUM;
         } else if (convoTopic == ConvoTopic.NOT_IMPORTANT && (education == Education.FAILING || education == Education.AVERAGE_STUDENT)) {
-            overallLevel = Level.LOW;
+            return Level.LOW;
         }
+        return Level.MEDIUM;
     }
 
     public void setEducation(Education education) {
@@ -46,5 +46,9 @@ public class Intelligence {
 
     public Level getOverallLevel() {
         return overallLevel;
+    }
+
+    public void setOverallLevel(Level level) {
+        this.overallLevel = level;
     }
 }

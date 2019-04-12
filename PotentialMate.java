@@ -51,21 +51,21 @@ public class PotentialMate {
 
     public void talk_stupid() {
         intelligence.setConvoTopic(ConvoTopic.NOT_IMPORTANT);
-        intelligence.calculateIntelligence();
+        intelligence.setOverallLevel(intelligence.calculateIntelligence());
         Main.updateEmotion(EmotionalState.BORED, Level.MEDIUM);
         System.out.println("Conversation was stupid --> medium level of boredom");
     }
 
     public void talk_smart() {
         intelligence.setConvoTopic(ConvoTopic.IMPORTANT_ISSUES);
-        intelligence.calculateIntelligence();
+        intelligence.setOverallLevel(intelligence.calculateIntelligence());
         Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
         System.out.println("Had a smart conversation --> increased impressed emotion");
     }
 
     public void talk_about_job() {
         intelligence.setConvoTopic(ConvoTopic.JOBS);
-        intelligence.calculateIntelligence();
+        intelligence.setOverallLevel(intelligence.calculateIntelligence());
     }
 
 
