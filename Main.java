@@ -172,6 +172,58 @@ public class Main {
                 System.out.println("LEARNING: good aura and made move --> increase aura importance");
                 auraImportance += 1;
             }
+        } else if (move == Move.DO_NOT_APPROACH) {
+            if (currPersonality == Level.HIGH) {
+                System.out.println("LEARNING: high personality and no move --> decrease personality importance");
+                personalityImportance -= 1;
+            } else if (currPersonality == Level.LOW) {
+                System.out.println("LEARNING: low personality and no move --> increase personality importance");
+                personalityImportance += 1;
+            }
+            if (currPhysical == Level.HIGH) {
+                System.out.println("LEARNING: high physical and no move --> decrease physical importance");
+                physicalAttractionImportance -= 1;
+            } else if (currPhysical == Level.LOW) {
+                System.out.println("LEARNING: low physical and no move --> increase physical importance");
+                physicalAttractionImportance += 1;
+            }
+            if (currIntelligence == Level.HIGH) {
+                System.out.println("LEARNING: high intelligence and no move --> decrease intelligence importance");
+                intelligenceImportance -= 1;
+            } else if (currIntelligence == Level.LOW) {
+                System.out.println("LEARNING: low intelligence but no move --> increase intelligence importance");
+                intelligenceImportance += 1;
+            }
+
+            if (currRelGoal == RelationshipGoal.ONE_NIGHT) {
+                System.out.println("LEARNING: my relationship goal supports my move --> increase relationship goal importance");
+                relationshipGoalImportance += 1;
+            } else if (currRelGoal == RelationshipGoal.LONG_TERM || currRelGoal == RelationshipGoal.ONE_NIGHT) {
+                System.out.println("LEARNING: my relationship goal contradicts my move --> decrease relationship goal importance");
+                relationshipGoalImportance -= 1;
+            }
+
+
+            if (currConfidence == Level.HIGH) {
+                System.out.println("LEARNING: high confidence and no move --> decrease confidence importance");
+                confidenceImportance -= 1;
+            } else if (currConfidence == Level.LOW) {
+                System.out.println("LEARNING: low confidence and no move --> increase confidence importance");
+                confidenceImportance += 1;
+            }
+
+
+            //if (currSocialStatus = )
+            //
+
+
+            if (currAura == Aura.TALKS_DOWN || currAura == Aura.AWKWARD || currAura == Aura.IGNORANT) {
+                System.out.println("LEARNING: bad aura and no move --> increase aura importance");
+                auraImportance += 1;
+            } else if (currAura == Aura.BOOSTS_MY_EGO) {
+                System.out.println("LEARNING: good aura and no move --> decrease aura importance");
+                auraImportance -= 1;
+            }
         }
     }
 
