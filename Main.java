@@ -87,21 +87,50 @@ public class Main {
 
 
         //sober, friends with mate, inviting environment, looking for long term, attractive mate:
-
-
         System.out.println("Decision:");
         Move move = mateFinder.decide();
         adjustImportances(move, mateFinder);
+
+
         //drunk, not looking for long term, inviting environment, attractive mate:
-        System.out.println("Decision" + ": " + mateFinder2.decide());
+        System.out.println("Decision:");
+        move = mateFinder2.decide();
+        adjustImportances(move, mateFinder2);
+
 
         //drunk, not looking for long term, not a good environment, unattractive mate
-        System.out.println("Decision" + ": " + mateFinder3.decide());
+        System.out.println("Decision:");
+        move = mateFinder3.decide();
+        adjustImportances(move, mateFinder3);
 
-        System.out.println("Decision" + ": " + mateFinder4.decide());
-        System.out.println("Decision" + ": " + mateFinder5.decide());
-        System.out.println("Decision" + ": " + mateFinder6.decide());
-        System.out.println("Decision" + ": " + mateFinder7.decide());
+
+        System.out.println("Decision:");
+        move = mateFinder4.decide();
+        adjustImportances(move, mateFinder4);
+
+
+        System.out.println("Decision:");
+        move = mateFinder5.decide();
+        adjustImportances(move, mateFinder5);
+
+        System.out.println("Decision:");
+        move = mateFinder6.decide();
+        adjustImportances(move, mateFinder6);
+
+        System.out.println("Decision:");
+        move = mateFinder7.decide();
+        adjustImportances(move, mateFinder);
+
+
+
+        System.out.println(confidenceImportance);
+        System.out.println(physicalAttractionImportance );
+        System.out.println(socialStatusImportance);
+        System.out.println(auraImportance);
+        System.out.println(intelligenceImportance);
+        System.out.println(personalityImportance);
+        System.out.println(relationshipGoalImportance);
+
 
     }
 
