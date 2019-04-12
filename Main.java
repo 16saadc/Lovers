@@ -88,48 +88,50 @@ public class Main {
 
         //sober, friends with mate, inviting environment, looking for long term, attractive mate:
         System.out.println("Decision:");
-        Move move = mateFinder.decide();
+        Move move = mateFinder.decide(emotion);
         adjustImportances(move, mateFinder);
 
 
         //drunk, not looking for long term, inviting environment, attractive mate:
         System.out.println("Decision:");
-        move = mateFinder2.decide();
+        move = mateFinder2.decide(emotion);
         adjustImportances(move, mateFinder2);
 
 
         //drunk, not looking for long term, not a good environment, unattractive mate
         System.out.println("Decision:");
-        move = mateFinder3.decide();
+        move = mateFinder3.decide(emotion);
         adjustImportances(move, mateFinder3);
 
 
         System.out.println("Decision:");
-        move = mateFinder4.decide();
+        move = mateFinder4.decide(emotion);
         adjustImportances(move, mateFinder4);
 
 
         System.out.println("Decision:");
-        move = mateFinder5.decide();
+        move = mateFinder5.decide(emotion);
         adjustImportances(move, mateFinder5);
 
         System.out.println("Decision:");
-        move = mateFinder6.decide();
+        move = mateFinder6.decide(emotion);
         adjustImportances(move, mateFinder6);
 
         System.out.println("Decision:");
-        move = mateFinder7.decide();
+        move = mateFinder7.decide(emotion);
         adjustImportances(move, mateFinder);
 
 
 
-        System.out.println(confidenceImportance);
-        System.out.println(physicalAttractionImportance );
-        System.out.println(socialStatusImportance);
-        System.out.println(auraImportance);
-        System.out.println(intelligenceImportance);
-        System.out.println(personalityImportance);
-        System.out.println(relationshipGoalImportance);
+        System.out.println("============");
+        System.out.println("learnedImportances:");
+        System.out.println("confidence:" + confidenceImportance);
+        System.out.println("physicalAttraction:" + physicalAttractionImportance );
+        System.out.println("socialStatus:" + socialStatusImportance);
+        System.out.println("aura:" + auraImportance);
+        System.out.println("intelligence:" + intelligenceImportance);
+        System.out.println("personality:" + personalityImportance);
+        System.out.println("relationshipGoal:" + relationshipGoalImportance);
 
 
     }
