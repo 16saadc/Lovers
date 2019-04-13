@@ -141,9 +141,11 @@ public class MateFinder {
             ||(Main.personalityImportance > 0 && potentialMatePersonality.equals(Level.HIGH))) {
                 emotionalState.setDominantEmotion(EmotionalState.IMPRESSED);
                 emotionalState.setSecondaryEmotion(EmotionalState.EXCITED);
+                System.out.println("One of the preferred traits is present in the potential mate --> new emotional state is impressed and excited");
         } else {
             emotionalState.setDominantEmotion(EmotionalState.BORED);
                 emotionalState.setSecondaryEmotion(EmotionalState.SAD);
+                System.out.println("None of the preferred traits is present in the potentialmate mate, --> emotional state is bored and sad");
         }
 
         //userState is mostly sober
