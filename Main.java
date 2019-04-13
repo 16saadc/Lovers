@@ -69,7 +69,7 @@ public class Main {
         PotentialMate attractiveConfidentMate = new PotentialMate(goodDate, lowShownInterest, highConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Will");
 
         PotentialMate semiAttractiveWithHighInterest = new PotentialMate(goodHookup, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Vishal");
-        PotentialMate notAttractiveWithHighInterest = new PotentialMate(low, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Vishal");
+        PotentialMate notAttractiveWithHighInterest = new PotentialMate(low, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Karen");
 
 
 
@@ -89,23 +89,23 @@ public class Main {
         mateList.add(mateFinder7);
 
 
-        System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
+        System.out.println("\n\n ======================== RUNNING WITH NEUTRAL INITIAL EMOTION ====================================");
         emotion = neutralEmotion;
         runMates();
 
-        System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
-        System.out.println("Running with initial happy emotion");
-        emotion = initialHappy;
-        runMates();
+        // System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
+        // System.out.println("Running with initial happy emotion");
+        // emotion = initialHappy;
+        // runMates();
 
 
-        System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
-        System.out.println("Running with initial sad emotion");
-        emotion = initialSad;
-        runMates();
+        // System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
+        // System.out.println("Running with initial sad emotion");
+        // emotion = initialSad;
+        // runMates();
 
-
-        attractiveMate.talk_stupid();
+        // TODO: need to add more methods like this during test runs to change things
+        //attractiveMate.talk_stupid();
 
     }
 
