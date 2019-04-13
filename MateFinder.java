@@ -83,7 +83,7 @@ public class MateFinder {
         EmotionalState dominantEmotion = emotionalState.getDominantEmotion();
         EmotionalState secondaryEmotion = emotionalState.getSecondaryEmotion();
         EmotionalState tertiaryEmotion = emotionalState.getTertiaryEmotion();
-        
+
 
         System.out.println("===========");
         System.out.println("Potential mate: " + potentialMate.getName());
@@ -96,14 +96,14 @@ public class MateFinder {
 
         Boolean hasPositiveFeelings = false;
 
-        if(dominantEmotion == EmotionalState.IMPRESSED || dominantEmotion == EmotionalState.HAPPY 
+        if(dominantEmotion == EmotionalState.IMPRESSED || dominantEmotion == EmotionalState.HAPPY
         || dominantEmotion == EmotionalState.AROUSED || secondaryEmotion == EmotionalState.HAPPY || secondaryEmotion == EmotionalState.AROUSED) {
             hasPositiveFeelings = true;
         }
 
         Boolean hasNegativeFeelings = false;
 
-        if(dominantEmotion == EmotionalState.SAD || dominantEmotion == EmotionalState.ANGRY 
+        if(dominantEmotion == EmotionalState.SAD || dominantEmotion == EmotionalState.ANGRY
         || secondaryEmotion == EmotionalState.SAD || secondaryEmotion == EmotionalState.ANGRY) {
             hasNegativeFeelings = true;
         }
@@ -133,17 +133,17 @@ public class MateFinder {
         }
 
         //Traits impotance
-        if ((Main.confidenceImportance > 0 && potentialMate.getConfidence().equals(Level.HIGH)) 
-            ||(Main.intelligenceImportance > 0 && potentialMate.getIntelligence().equals(Level.HIGH)) 
-            ||(Main.socialStatusImportance > 0 && potentialMate.getSocialStatus().equals(Level.HIGH)) 
-            ||(Main.auraImportance > 0 && potentialMate.getAura().equals(Level.HIGH)) 
+        if ((Main.confidenceImportance > 0 && potentialMate.getConfidence().equals(Level.HIGH))
+            ||(Main.intelligenceImportance > 0 && potentialMate.getIntelligence().equals(Level.HIGH))
+            ||(Main.socialStatusImportance > 0 && potentialMate.getSocialStatus().equals(Level.HIGH))
+            ||(Main.auraImportance > 0 && potentialMate.getAura().equals(Level.HIGH))
             ||(Main.physicalAttractionImportance > 0 && potentialMatePhysical.equals(Level.HIGH))
             ||(Main.personalityImportance > 0 && potentialMatePersonality.equals(Level.HIGH))) {
-                Emotion.setDominantEmotion(EmotionalState.IMPRESSED);
-                Emotion.secondaryEmotion(EmotionalState.EXCITED);
+                emotionalState.setDominantEmotion(EmotionalState.IMPRESSED);
+                emotionalState.setSecondaryEmotion(EmotionalState.EXCITED);
         } else {
-            Emotion.setDominantEmotion(EmotionalState.BORED);
-                Emotion.secondaryEmotion(EmotionalState.SAD);
+            emotionalState.setDominantEmotion(EmotionalState.BORED);
+                emotionalState.setSecondaryEmotion(EmotionalState.SAD);
         }
 
         //userState is mostly sober
