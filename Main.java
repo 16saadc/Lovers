@@ -93,6 +93,9 @@ public class Main {
         emotion = neutralEmotion;
         runMates();
 
+        System.out.println("\n\n ======================== RUNNING SAME MATES AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
+        runMates();
+
         // System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
         // System.out.println("Running with initial happy emotion");
         // emotion = initialHappy;
