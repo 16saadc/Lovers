@@ -16,10 +16,16 @@ public class Main {
     public static Emotion emotion;
     public static UserState currentUserState;
 
+    public static List<MateFinder> mateList = new ArrayList<MateFinder>();
+
     public static void main(String[] args) {
 
         // START WITH INITIAL NEUTRAL EMOTION
-        emotion = new Emotion(EmotionalState.NEUTRAL, EmotionalState.NEUTRAL, EmotionalState.NEUTRAL);
+        Emotion neutralEmotion = new Emotion(EmotionalState.NEUTRAL, EmotionalState.NEUTRAL, EmotionalState.NEUTRAL);
+
+        Emotion initialHappy = new Emotion(EmotionalState.HAPPY, EmotionalState.EXCITED, EmotionalState.NEUTRAL);
+        Emotion initialSad = new Emotion(EmotionalState.SAD, EmotionalState.ANGRY, EmotionalState.NEUTRAL);
+        Emotion mixedEmotions = new Emotion(EmotionalState.CONFUSED, EmotionalState.HAPPY, EmotionalState.BORED);
 
 
         UserState sober_longTerm = new UserState(RelationshipGoal.LONG_TERM, Sobriety.SOBER, MateState.FRIENDS, Environment.INVITING);
@@ -74,63 +80,96 @@ public class Main {
         MateFinder mateFinder5 = new MateFinder(notAttractiveWithHighInterest, drunk_Uninviting);
         MateFinder mateFinder6 = new MateFinder(attractiveConfidentMate, sober_longTerm);
         MateFinder mateFinder7 = new MateFinder(notAttractive, drunk_Uninviting);
+        mateList.add(mateFinder);
+        mateList.add(mateFinder2);
+        mateList.add(mateFinder3);
+        mateList.add(mateFinder4);
+        mateList.add(mateFinder5);
+        mateList.add(mateFinder6);
+        mateList.add(mateFinder7);
 
 
-        //sober, friends with mate, inviting environment, looking for long term, attractive mate:
-        System.out.println("Decision:");
-        Move move = mateFinder.decide(emotion);
-        adjustImportances(move, mateFinder);
-        printImportances();
+        System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
+        emotion = neutralEmotion;
+        runMates(neutralEmotion);
+
+        System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
+        System.out.println("Running with initial happy emotion");
+        emotion = initialHappy;
+        runMates(initialHappy);
 
 
-        //drunk, not looking for long term, inviting environment, attractive mate:
-        System.out.println("Decision:");
-        move = mateFinder2.decide(emotion);
-        adjustImportances(move, mateFinder2);
-        printImportances();
-
-
-        //drunk, not looking for long term, not a good environment, unattractive mate
-        System.out.println("Decision:");
-        move = mateFinder3.decide(emotion);
-        adjustImportances(move, mateFinder3);
-        printImportances();
-
-
-        System.out.println("Decision:");
-        move = mateFinder4.decide(emotion);
-        adjustImportances(move, mateFinder4);
-        printImportances();
-
-
-        System.out.println("Decision:");
-        move = mateFinder5.decide(emotion);
-        adjustImportances(move, mateFinder5);
-        printImportances();
-
-        System.out.println("Decision:");
-        move = mateFinder6.decide(emotion);
-        adjustImportances(move, mateFinder6);
-        printImportances();
-
-        System.out.println("Decision:");
-        move = mateFinder7.decide(emotion);
-        adjustImportances(move, mateFinder);
-        printImportances();
-
-        System.out.println("Decision:");
-        move = mateFinder2.decide(emotion);
-        adjustImportances(move, mateFinder2);
-        printImportances();
+        System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
+        System.out.println("Running with initial sad emotion");
+        emotion = initialSad;
+        runMates(initialSad);
 
 
         attractiveMate.talk_stupid();
 
+    }
 
 
 
 
 
+
+    public static void runMates(Emotion emotion) {
+        //sober, friends with mate, inviting environment, looking for long term, attractive mate:
+        for (MateFinder mateFinder : mateList) {
+            System.out.println("Decision:");
+            Move move = mateFinder.decide(emotion);
+            adjustImportances(move, mateFinder);
+            printImportances();
+
+            System.out.println("\n\n\n");
+        }
+
+        // System.out.println("Decision:");
+        // Move move = mateFinder.decide(emotion);
+        // adjustImportances(move, mateFinder);
+        // printImportances();
+
+
+        // //drunk, not looking for long term, inviting environment, attractive mate:
+        // System.out.println("Decision:");
+        // move = mateFinder2.decide(emotion);
+        // adjustImportances(move, mateFinder2);
+        // printImportances();
+
+
+        // //drunk, not looking for long term, not a good environment, unattractive mate
+        // System.out.println("Decision:");
+        // move = mateFinder3.decide(emotion);
+        // adjustImportances(move, mateFinder3);
+        // printImportances();
+
+
+        // System.out.println("Decision:");
+        // move = mateFinder4.decide(emotion);
+        // adjustImportances(move, mateFinder4);
+        // printImportances();
+
+
+        // System.out.println("Decision:");
+        // move = mateFinder5.decide(emotion);
+        // adjustImportances(move, mateFinder5);
+        // printImportances();
+
+        // System.out.println("Decision:");
+        // move = mateFinder6.decide(emotion);
+        // adjustImportances(move, mateFinder6);
+        // printImportances();
+
+        // System.out.println("Decision:");
+        // move = mateFinder7.decide(emotion);
+        // adjustImportances(move, mateFinder);
+        // printImportances();
+
+        // System.out.println("Decision:");
+        // move = mateFinder2.decide(emotion);
+        // adjustImportances(move, mateFinder2);
+        // printImportances();
     }
 
     public static void printImportances() {
