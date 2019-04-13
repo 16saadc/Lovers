@@ -22,30 +22,15 @@ public class Main {
         emotion = new Emotion(EmotionalState.NEUTRAL, EmotionalState.NEUTRAL, EmotionalState.NEUTRAL);
 
 
-
-        //
-        // create a for loop to go through all potential mates
-        // Move move = mate.decide()
-        // updateImportance(mate, move)
-        //     maybe look at last 3 - 5 mates to update importances?
-        //
-        //     possibly tie emotion into importance -- if something specific makes you happy, make it more important
-
-
-
-
         UserState sober_longTerm = new UserState(RelationshipGoal.LONG_TERM, Sobriety.SOBER, MateState.FRIENDS, Environment.INVITING);
         UserState drunk_Hookup = new UserState(RelationshipGoal.ONE_NIGHT, Sobriety.DRUNK, MateState.FAMILIAR, Environment.INVITING);
         UserState drunk_Uninviting = new UserState(RelationshipGoal.ONE_NIGHT, Sobriety.DRUNK, MateState.FAMILIAR, Environment.NO_GO);
+        UserState sober_stranger_neutral = new UserState(RelationshipGoal.UNSURE, Sobriety.SOBER, MateState.NEVER_MET, Environment.NEUTRAL);
 
         PhysicalAttraction highPhysicalAttraction = new PhysicalAttraction(Level.HIGH);
         PhysicalAttraction lowPhysicalAttraction = new PhysicalAttraction(Level.LOW);
+        PhysicalAttraction mediumPhysicalAttraction = new PhysicalAttraction(Level.MEDIUM);
 
-
-
-
-        // Confidence highConfidence = new Confidence(Level.HIGH);
-        // Confidence lowConfidence = new Confidence(Level.LOW);
 
         PersonalityAttraction highPersonality = new PersonalityAttraction(Level.HIGH);
         PersonalityAttraction lowPersonality = new PersonalityAttraction(Level.LOW);
@@ -56,25 +41,30 @@ public class Main {
         Attraction goodEverything = new Attraction(highPhysicalAttraction, highPersonality);
 
         RelationshipStatus singleStatus = new RelationshipStatus(Status.SINGLE, Loyalty.NEVER_CHEAT);
+        RelationshipStatus takenStatus = new RelationshipStatus(Status.RELATIONSHIP_LONG, Loyalty.NEVER_CHEAT);
 
-        ShownInterest averageShownInterest = new ShownInterest(Level.MEDIUM);
+        ShownInterest lowShownInterest = new ShownInterest(Level.LOW);
         ShownInterest highShownInterest = new ShownInterest(Level.HIGH);
 
+        Confidence lowConfidence = new Confidence(Level.LOW);
         Confidence averageConfidence = new Confidence(Level.MEDIUM);
         Confidence highConfidence = new Confidence(Level.HIGH);
 
+        Intelligence lowIntelligence = new Intelligence(Education.FAILING, ConvoTopic.IGNORANT);
         Intelligence mediumIntelligence = new Intelligence(Education.AVERAGE_STUDENT, ConvoTopic.IMPORTANT_ISSUES);
+        Intelligence highIntelligence = new Intelligence(Education.A_STUDENT, ConvoTopic.IMPORTANT_ISSUES);
 
         SocialStatus averageSocialStatus = new SocialStatus(Popularity.AVERAGE, Education.AVERAGE_STUDENT, singleStatus);
 
-        PotentialMate attractiveMate = new PotentialMate(goodDate, averageShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "David");
-        PotentialMate semiAttractive = new PotentialMate(goodHookup, averageShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Katie");
-        PotentialMate notAttractive = new PotentialMate(low, averageShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Paul");
+        PotentialMate attractiveMate = new PotentialMate(goodDate, lowShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, highIntelligence, "David");
+        PotentialMate semiAttractive = new PotentialMate(goodHookup, lowShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Katie");
+        PotentialMate notAttractive = new PotentialMate(low, lowShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, lowIntelligence, "Paul");
 
-        PotentialMate attractiveConfidentMate = new PotentialMate(goodDate, averageShownInterest, highConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Will");
+        PotentialMate attractiveConfidentMate = new PotentialMate(goodDate, lowShownInterest, highConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Will");
 
         PotentialMate semiAttractiveWithHighInterest = new PotentialMate(goodHookup, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Vishal");
         PotentialMate notAttractiveWithHighInterest = new PotentialMate(low, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Vishal");
+
 
 
         MateFinder mateFinder = new MateFinder(attractiveMate, sober_longTerm);
@@ -90,39 +80,60 @@ public class Main {
         System.out.println("Decision:");
         Move move = mateFinder.decide(emotion);
         adjustImportances(move, mateFinder);
+        printImportances();
 
 
         //drunk, not looking for long term, inviting environment, attractive mate:
         System.out.println("Decision:");
         move = mateFinder2.decide(emotion);
         adjustImportances(move, mateFinder2);
+        printImportances();
 
 
         //drunk, not looking for long term, not a good environment, unattractive mate
         System.out.println("Decision:");
         move = mateFinder3.decide(emotion);
         adjustImportances(move, mateFinder3);
+        printImportances();
 
 
         System.out.println("Decision:");
         move = mateFinder4.decide(emotion);
         adjustImportances(move, mateFinder4);
+        printImportances();
 
 
         System.out.println("Decision:");
         move = mateFinder5.decide(emotion);
         adjustImportances(move, mateFinder5);
+        printImportances();
 
         System.out.println("Decision:");
         move = mateFinder6.decide(emotion);
         adjustImportances(move, mateFinder6);
+        printImportances();
 
         System.out.println("Decision:");
         move = mateFinder7.decide(emotion);
         adjustImportances(move, mateFinder);
+        printImportances();
+
+        System.out.println("Decision:");
+        move = mateFinder2.decide(emotion);
+        adjustImportances(move, mateFinder2);
+        printImportances();
+
+
+        attractiveMate.talk_stupid();
 
 
 
+
+
+
+    }
+
+    public static void printImportances() {
         System.out.println("============");
         System.out.println("learnedImportances:");
         System.out.println("confidence:" + confidenceImportance);
@@ -132,9 +143,10 @@ public class Main {
         System.out.println("intelligence:" + intelligenceImportance);
         System.out.println("personality:" + personalityImportance);
         System.out.println("relationshipGoal:" + relationshipGoalImportance);
-
-
     }
+
+
+
 
 
     public static void adjustImportances(Move move, MateFinder matefinder) {
@@ -142,7 +154,7 @@ public class Main {
         UserState userState = matefinder.getCurrentState();
         Level currPersonality = matefinder.getPotentialMatePersonality();
         Level currPhysical = matefinder.getPotentialMatePhysicalAttractiveness();
-        //Level currIntelligence = matefinder.getPotentialMate().getIntelligence().getOverallLevel();
+        Level currIntelligence = matefinder.getPotentialMate().getIntelligence().getOverallLevel();
         RelationshipGoal currRelGoal = userState.getRelationshipGoal();
         Level currConfidence = matefinder.getPotentialMate().getConfidence().getLevel();
         SocialStatus currSocialStatus = matefinder.getPotentialMate().getSocialStatus();
@@ -164,13 +176,13 @@ public class Main {
                 System.out.println("LEARNING: low physical and made move --> decrease physical importance");
                 physicalAttractionImportance -= 1;
             }
-            // if (currIntelligence == Level.HIGH) {
-            //     System.out.println("LEARNING: high intelligence and made move --> increase intelligence importance");
-            //     intelligenceImportance += 1;
-            // } else if (currIntelligence == Level.LOW) {
-            //     System.out.println("LEARNING: low intelligence but made move --> decrease intelligence importance");
-            //     intelligenceImportance -= 1;
-            // }
+            if (currIntelligence == Level.HIGH) {
+                System.out.println("LEARNING: high intelligence and made move --> increase intelligence importance");
+                intelligenceImportance += 1;
+            } else if (currIntelligence == Level.LOW) {
+                System.out.println("LEARNING: low intelligence but made move --> decrease intelligence importance");
+                intelligenceImportance -= 1;
+            }
 
             if (currRelGoal == RelationshipGoal.ONE_NIGHT) {
                 System.out.println("LEARNING: my relationship goal contradicts my move --> decrease relationship goal importance");
@@ -189,9 +201,6 @@ public class Main {
                 confidenceImportance -= 1;
             }
 
-
-            //if (currSocialStatus = )
-            //
 
 
             if (currAura == Aura.TALKS_DOWN || currAura == Aura.AWKWARD || currAura == Aura.IGNORANT) {
@@ -216,13 +225,13 @@ public class Main {
                 System.out.println("LEARNING: low physical and no move --> increase physical importance");
                 physicalAttractionImportance += 1;
             }
-            // if (currIntelligence == Level.HIGH) {
-            //     System.out.println("LEARNING: high intelligence and no move --> decrease intelligence importance");
-            //     intelligenceImportance -= 1;
-            // } else if (currIntelligence == Level.LOW) {
-            //     System.out.println("LEARNING: low intelligence but no move --> increase intelligence importance");
-            //     intelligenceImportance += 1;
-            // }
+            if (currIntelligence == Level.HIGH) {
+                System.out.println("LEARNING: high intelligence and no move --> decrease intelligence importance");
+                intelligenceImportance -= 1;
+            } else if (currIntelligence == Level.LOW) {
+                System.out.println("LEARNING: low intelligence but no move --> increase intelligence importance");
+                intelligenceImportance += 1;
+            }
 
             if (currRelGoal == RelationshipGoal.ONE_NIGHT) {
                 System.out.println("LEARNING: my relationship goal supports my move --> increase relationship goal importance");
@@ -241,9 +250,6 @@ public class Main {
                 confidenceImportance += 1;
             }
 
-
-            //if (currSocialStatus = )
-            //
 
 
             if (currAura == Aura.TALKS_DOWN || currAura == Aura.AWKWARD || currAura == Aura.IGNORANT) {

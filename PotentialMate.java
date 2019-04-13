@@ -27,7 +27,6 @@ public class PotentialMate {
    private SocialStatus socialStatus;
    private Aura aura;
    private Intelligence intelligence;
-   //Comfortable comfortable;
 
     /**
     * potential mate we are assessing
@@ -45,6 +44,7 @@ public class PotentialMate {
          this.interest = interest;
          this.socialStatus = socialStatus;
          this.aura = aura;
+         this.intelligence = intelligence;
     }
 
 // Mate Methods -------------------------------------------
