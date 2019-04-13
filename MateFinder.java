@@ -132,6 +132,20 @@ public class MateFinder {
             return Move.DO_NOT_APPROACH;
         }
 
+        //Traits impotance
+        if ((Main.confidenceImportance > 0 && potentialMate.getConfidence().equals(Level.HIGH)) 
+            ||(Main.intelligenceImportance > 0 && potentialMate.getIntelligence().equals(Level.HIGH)) 
+            ||(Main.socialStatusImportance > 0 && potentialMate.getSocialStatus().equals(Level.HIGH)) 
+            ||(Main.auraImportance > 0 && potentialMate.getAura().equals(Level.HIGH)) 
+            ||(Main.physicalAttractionImportance > 0 && potentialMatePhysical.equals(Level.HIGH))
+            ||(Main.personalityImportance > 0 && potentialMatePersonality.equals(Level.HIGH))) {
+                Emotion.setDominantEmotion(EmotionalState.IMPRESSED);
+                Emotion.secondaryEmotion(EmotionalState.EXCITED);
+        } else {
+            Emotion.setDominantEmotion(EmotionalState.BORED);
+                Emotion.secondaryEmotion(EmotionalState.SAD);
+        }
+
         //userState is mostly sober
         if (currentState.getSobriety().equals(Sobriety.SOBER) || currentState.getSobriety().equals(Sobriety.TIPSY)) {
             System.out.println("The person is sober or is a little tipsy, there is not conflict --> go to the next method");
