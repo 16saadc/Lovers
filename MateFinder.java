@@ -101,44 +101,44 @@ public class MateFinder {
 
 
         if (highTraitHighImportanceCount > 4) {
-            System.out.println("This mate has 4 or more traits that I REALLY like, so I am more impressed and happier");
+            System.out.println("EMOTION: This mate has 4 or more traits that I REALLY like, so I am more impressed and happier");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.HIGH);
             Main.updateEmotion(EmotionalState.HAPPY, Level.MEDIUM);
             return;
         } else if (highTraitHighImportanceCount > 2) {
-            System.out.println("This mate has 2-3 traits that I REALLY like, so I am more impressed and happier");
+            System.out.println("EMOTION: This mate has 2-3 traits that I REALLY like, so I am more impressed and happier");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
             Main.updateEmotion(EmotionalState.HAPPY, Level.LOW);
             return;
         } else if (highTraitHighImportanceCount > 0) {
-            System.out.println("This mate has some traits that I REALLY like, so I am more impressed");
+            System.out.println("EMOTION: This mate has some traits that I REALLY like, so I am more impressed");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
             return;
         } else if (highTraitMediumImportanceCount > 4) {
-            System.out.println("This mate has 4 or more traits that I SORT OF like, so I am more impressed and happier");
+            System.out.println("EMOTION: This mate has 4 or more traits that I SORT OF like, so I am more impressed and happier");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
             Main.updateEmotion(EmotionalState.HAPPY, Level.LOW);
             return;
         } else if (highTraitMediumImportanceCount > 2) {
-            System.out.println("This mate has 2-3 traits that I SORT OF like, so I am more impressed");
+            System.out.println("EMOTION: This mate has 2-3 traits that I SORT OF like, so I am more impressed");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
             return;
         } else if (highTraitMediumImportanceCount > 0) {
-            System.out.println("This mate has some traits that I SORT OF like, so I am slightly more impressed");
+            System.out.println("EMOTION: This mate has some traits that I SORT OF like, so I am slightly more impressed");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.LOW);
             return;
         } else if (lowTrait_highImportanceCount > 4) {
-            System.out.println("This mate has 4 or more traits that I DO NOT like, so I am a lot more sad and bored");
+            System.out.println("EMOTION: This mate has 4 or more traits that I DO NOT like, so I am a lot more sad and bored");
             Main.updateEmotion(EmotionalState.SAD, Level.HIGH);
             Main.updateEmotion(EmotionalState.BORED, Level.MEDIUM);
             return;
         } else if (lowTrait_highImportanceCount > 2) {
-            System.out.println("This mate has 2-3 traits that I DO NOT like, so I am slightly more sad and mored");
+            System.out.println("EMOTION: This mate has 2-3 traits that I DO NOT like, so I am slightly more sad and mored");
             Main.updateEmotion(EmotionalState.SAD, Level.MEDIUM);
             Main.updateEmotion(EmotionalState.BORED, Level.LOW);
             return;
         } else if (lowTrait_highImportanceCount > 0) {
-            System.out.println("This mate has some traits that I DO NOT like, so I am slightly more sad");
+            System.out.println("EMOTION: This mate has some traits that I DO NOT like, so I am slightly more sad");
             Main.updateEmotion(EmotionalState.SAD, Level.MEDIUM);
             return;
         }
@@ -181,7 +181,8 @@ public class MateFinder {
         Boolean hasPositiveFeelings = false;
 
         if(dominantEmotion == EmotionalState.IMPRESSED || dominantEmotion == EmotionalState.HAPPY
-        || dominantEmotion == EmotionalState.AROUSED || secondaryEmotion == EmotionalState.HAPPY || secondaryEmotion == EmotionalState.AROUSED) {
+        || dominantEmotion == EmotionalState.AROUSED || secondaryEmotion == EmotionalState.HAPPY || secondaryEmotion == EmotionalState.AROUSED
+        || secondaryEmotion == EmotionalState.IMPRESSED) {
             hasPositiveFeelings = true;
         }
 
@@ -212,7 +213,7 @@ public class MateFinder {
 
         //Prioritize dominant negative emotions for decisions for what move to make over logic based in traits
         if(dominantEmotion == EmotionalState.ANGRY || secondaryEmotion == EmotionalState.ANGRY) {
-            System.out.println("If emotional state is angry, no reason to make a move or pursue, do not approach");
+            System.out.println("EMOTION: If emotional state is angry, no reason to make a move or pursue, do not approach");
             return Move.DO_NOT_APPROACH;
         }
 
@@ -232,19 +233,19 @@ public class MateFinder {
                         System.out.println("If the environment is not inappropriate, there is no conflict --> go to the next method");
                         //attractive person, looking for long term, environment is perfect, make your move
                         if (currentState.getEnvironment().equals(Environment.DEFINITELY) && hasPositiveFeelings) {
-                            System.out.println("If the environment is well suited and emotional state is positive, then make a move immediately ");
+                            System.out.println("EMOTION: If the environment is well suited and emotional state is positive, then make a move immediately ");
                             return Move.ASK_OUT;
                         }
                         if (currentState.getMateState().equals(MateState.ALREADY_CRUSH)) {
                             System.out.println("If the person already has a crush on the potential mate --> go to the next method");
                             if (currentState.getEnvironment().equals(Environment.INVITING) && hasPositiveFeelings) {
-                                System.out.println("if the environment is appropriate and emotional state is positive --> make a move");
+                                System.out.println("EMOTION: if the environment is appropriate and emotional state is positive --> make a move");
                                 return Move.ASK_OUT;
                             }
                         } else if (currentState.getMateState().equals(MateState.FRIENDS)) {
                             System.out.println("If the potential mate is a friend --> go to the next method");
                             if (currentState.getEnvironment().equals(Environment.INVITING) || isAroused) {
-                                System.out.println("If the environment is inviting or feeling aroused --> flirt");
+                                System.out.println("EMOTION: If the environment is inviting or feeling aroused --> flirt");
                                 return Move.FLIRT;
                             }
                         }
@@ -272,10 +273,10 @@ public class MateFinder {
                     if (!currentState.getEnvironment().equals(Environment.NO_GO)) {
                         System.out.println("If the environment is not inappropriate -> go to the next method");
                         if (currentState.getEnvironment().equals(Environment.BE_CONFIDENT) || hasPositiveFeelings) {
-                            System.out.println("if the environment is making the person feel confident or emotional state is good --> talk more");
+                            System.out.println("EMOTION: if the environment is making the person feel confident or emotional state is good --> talk more");
                             return Move.TALK_MORE;
                         } else if(hasPositiveFeelings) {
-                            System.out.println("emotional state is positive --> flirt");
+                            System.out.println("EMOTION: emotional state is positive --> flirt");
                             return Move.FLIRT;
                         }
                     }
@@ -291,7 +292,7 @@ public class MateFinder {
                         + ", there is no conflict --> go to the next method");
                     if (!currentState.getEnvironment().equals(Environment.NO_GO)) {
                         if(shownInterestLevel.equals(Level.HIGH) || isAroused) {
-                            System.out.println("If the mate shows a high level of interest, despite environmental circumstances, or user state is aroused --> flirt");
+                            System.out.println("EMOTION: If the mate shows a high level of interest, despite environmental circumstances, or user state is aroused --> flirt");
                             return Move.FLIRT;
                         }
                         if(isConfused) {
@@ -328,25 +329,25 @@ public class MateFinder {
                             System.out.println("If the environment is not inappropriate, there is no conflict --> go to the next method");
                             //attractive person, looking for long term, environment is perfect, make your move
                             if (currentState.getEnvironment().equals(Environment.DEFINITELY) || hasPositiveFeelings) {
-                                System.out.println("If the environment is well suited or emotional state is positive, then make move immediately");
+                                System.out.println("EMOTION: If the environment is well suited or emotional state is positive, then make move immediately");
                                 return Move.ASK_OUT;
                             }
                             if (currentState.getMateState().equals(MateState.ALREADY_CRUSH)) {
                                 System.out.println("If the potentialmate is already the person's crush -> go the next method");
                                 if (currentState.getEnvironment().equals(Environment.INVITING) || hasPositiveFeelings) {
-                                    System.out.println("If the the environment is inviting or has positive feelings --> make a move");
+                                    System.out.println("EMOTION: If the the environment is inviting or has positive feelings --> make a move");
                                     return Move.ASK_OUT;
                                 }
                             }
                             //environment is good, userState is drunk, flirt more
                             if (currentState.getEnvironment().equals(Environment.INVITING) || isAroused) {
-                                System.out.println("If the environment is inviting or person is aroused then flirt");
+                                System.out.println("EMOTION: If the environment is inviting or person is aroused then flirt");
                                 return Move.FLIRT;
                             }
                             //environment isn't perfect, talk to them more
                             else {
                                 if(shownInterestLevel.equals(Level.HIGH) || isAroused || hasPositiveFeelings) {
-                                    System.out.println("If the mate shows a high level of interest, despite environmental circumstances, and emotional state is positive or aroused --> flirt");
+                                    System.out.println("EMOTION: If the mate shows a high level of interest, despite environmental circumstances, and emotional state is positive or aroused --> flirt");
                                     return Move.FLIRT;
                                 }
                                 if(isConfused) {
@@ -358,12 +359,12 @@ public class MateFinder {
                             }
                         }
                         if(shownInterestLevel.equals(Level.HIGH) || isAroused) {
-                            System.out.println("If the mate shows a high level of interest or emotional state is aroused, despite environmental circumstances --> talk more");
+                            System.out.println("EMOTION: If the mate shows a high level of interest or emotional state is aroused, despite environmental circumstances --> talk more");
                             return Move.TALK_MORE;
                         }
                         //environment is a no go so don't approach
                         if(isBored) {
-                            System.out.println("The environment is not appropriate or feeling of boredom --> do not make a move");
+                            System.out.println("EMOTION: The environment is not appropriate or feeling of boredom --> do not make a move");
                             return Move.DO_NOT_APPROACH;
                         }
                             System.out.println("The environment is not appropriate --> do not make a move");
@@ -396,7 +397,7 @@ public class MateFinder {
                         + ", there is no conflict --> go to the next method");
                         //environment is bad but userState is drunk, so talk more
                         if (currentState.getEnvironment().equals(Environment.NO_GO) || hasPositiveFeelings || isAroused) {
-                            System.out.println("If the environment is bad but the person is drunk and there exist positive feelings --> talk more");
+                            System.out.println("EMOTION: If the environment is bad but the person is drunk and there exist positive feelings --> talk more");
                             return Move.TALK_MORE;
                         } else {
                             if(isConfused) {
@@ -427,7 +428,7 @@ public class MateFinder {
                 System.out.println("if the person is totally blacked out, he will definetly make a move --> go to next method");
                 if (currentState.getEnvironment().equals(Environment.NO_GO)) {
                     if(shownInterestLevel.equals(Level.HIGH) || isAroused || hasPositiveFeelings) {
-                        System.out.println("If the mate shows a high level of interest, despite environmental circumstances, or positive emotional state --> flirt");
+                        System.out.println("EMOTION: If the mate shows a high level of interest, despite environmental circumstances, or positive emotional state --> flirt");
                         return Move.FLIRT;
                     }
                     System.out.println("if the environment is bad --> talk more");
