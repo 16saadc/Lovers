@@ -263,8 +263,14 @@ public class MateFinder {
                     //environment is a no go so don't approach
                     return Move.DO_NOT_APPROACH;
                 }
-                System.out.println("If the person goal is a long term relationship --> make a move");
-                return Move.ASK_OUT;
+                if (hasPositiveFeelings) {
+                    System.out.println("EMOTION: If the person is in a positive mood --> Make a move");
+                    return Move.ASK_OUT;
+                } else {
+                    System.out.println("No emotions send a strong signal, but there are positives --> talk more");
+                    return Move.TALK_MORE;
+                }
+
             } else if (currentState.getRelationshipGoal().equals(RelationshipGoal.ONE_NIGHT)) {
                 System.out.println("If the person's goal is a one nigh stand --> then go to the next method");
                 //dont take into account personality for one night goal

@@ -122,7 +122,7 @@ public class Main {
         for (MateFinder mateFinder : mateList) {
             System.out.println("Decision:");
             Move move = mateFinder.decide();
-            adjustImportances(move, mateFinder);
+            //adjustImportances(move, mateFinder);
             printImportances();
 
             System.out.println("\n\n\n");
