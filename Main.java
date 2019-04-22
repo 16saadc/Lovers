@@ -16,7 +16,8 @@ public class Main {
     public static Emotion emotion;
     public static UserState currentUserState;
 
-    public static List<MateFinder> mateList = new ArrayList<MateFinder>();
+    public static List<MateFinder> maleMateList = new ArrayList<MateFinder>();
+    public static List<MateFinder> femaleMateList = new ArrayList<MateFinder>();
 
     public static void main(String[] args) {
 
@@ -61,6 +62,7 @@ public class Main {
         Intelligence highIntelligence = new Intelligence(Education.A_STUDENT, ConvoTopic.IMPORTANT_ISSUES);
 
         SocialStatus averageSocialStatus = new SocialStatus(Popularity.AVERAGE, Education.AVERAGE_STUDENT, singleStatus);
+        SocialStatus lowSocialStatus = new SocialStatus(Popularity.NO_FRIENDS, Education.AVERAGE_STUDENT, singleStatus);
 
         PotentialMate attractiveMate = new PotentialMate(goodDate, lowShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, highIntelligence, "David");
         PotentialMate semiAttractive = new PotentialMate(goodHookup, lowShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Katie");
@@ -68,47 +70,44 @@ public class Main {
 
         PotentialMate attractiveConfidentMate = new PotentialMate(goodDate, lowShownInterest, highConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Will");
 
-        PotentialMate semiAttractiveWithHighInterest = new PotentialMate(goodHookup, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Vishal");
+        PotentialMate notAttractiveQuietWithLowInterest = new PotentialMate(low, lowShownInterest, lowConfidence, lowSocialStatus, Aura.QUIET, lowIntelligence, "Vishal");
         PotentialMate notAttractiveWithHighInterest = new PotentialMate(low, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Karen");
 
 
 
-        MateFinder mateFinder = new MateFinder(attractiveMate, sober_longTerm);
-        MateFinder mateFinder2 = new MateFinder(semiAttractive, drunk_Hookup);
-        MateFinder mateFinder3 = new MateFinder(notAttractive, drunk_Uninviting);
-        MateFinder mateFinder4 = new MateFinder(semiAttractiveWithHighInterest, drunk_Hookup);
-        MateFinder mateFinder5 = new MateFinder(notAttractiveWithHighInterest, drunk_Uninviting);
-        MateFinder mateFinder6 = new MateFinder(attractiveConfidentMate, sober_longTerm);
-        MateFinder mateFinder7 = new MateFinder(notAttractive, drunk_Uninviting);
-        mateList.add(mateFinder);
-        mateList.add(mateFinder2);
-        mateList.add(mateFinder3);
-        mateList.add(mateFinder4);
-        mateList.add(mateFinder5);
-        mateList.add(mateFinder6);
-        mateList.add(mateFinder7);
+        MateFinder mateFinder = new MateFinder(attractiveMate, sober_longTerm, Gender.MALE);
+        MateFinder mateFinder2 = new MateFinder(semiAttractive, drunk_Hookup, Gender.FEMALE);
+        MateFinder mateFinder3 = new MateFinder(notAttractive, drunk_Uninviting, Gender.MALE);
+        MateFinder mateFinder4 = new MateFinder(notAttractiveQuietWithLowInterest, drunk_Hookup, Gender.FEMALE);
+        MateFinder mateFinder5 = new MateFinder(notAttractiveWithHighInterest, drunk_Uninviting, Gender.FEMALE);
+        MateFinder mateFinder6 = new MateFinder(attractiveConfidentMate, sober_longTerm, Gender.MALE);
+        MateFinder mateFinder7 = new MateFinder(notAttractive, drunk_Uninviting, Gender.MALE);
+        maleMateList.add(mateFinder);
+        femaleMateList.add(mateFinder2);
+        maleMateList.add(mateFinder3);
+        femaleMateList.add(mateFinder4);
+        femaleMateList.add(mateFinder5);
+        maleMateList.add(mateFinder6);
+        maleMateList.add(mateFinder7);
 
 
-        System.out.println("\n\n ======================== RUNNING WITH NEUTRAL INITIAL EMOTION ====================================");
+        initializeMaleImportances();
+        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH NEUTRAL INITIAL EMOTION ====================================");
         emotion = neutralEmotion;
-        runMates();
+        runMaleMates();
 
-        System.out.println("\n\n ======================== RUNNING SAME MATES AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
-        runMates();
+        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
+        runMaleMates();
 
-        // System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
-        // System.out.println("Running with initial happy emotion");
-        // emotion = initialHappy;
-        // runMates();
+        emotion = neutralEmotion;
+        initializeFemaleImportances();
+        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH NEUTRAL INITIAL EMOTION ====================================");
+        emotion = neutralEmotion;
+        runFemaleMates();
 
+        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
+        runFemaleMates();
 
-        // System.out.println("\n\n ======================== RUNNING WITH NEW INITIAL EMOTION ====================================");
-        // System.out.println("Running with initial sad emotion");
-        // emotion = initialSad;
-        // runMates();
-
-        // TODO: need to add more methods like this during test runs to change things
-        //attractiveMate.talk_stupid();
 
     }
 
@@ -117,17 +116,28 @@ public class Main {
 
 
 
-    public static void runMates() {
+    public static void runMaleMates() {
         //sober, friends with mate, inviting environment, looking for long term, attractive mate:
-        for (MateFinder mateFinder : mateList) {
+        for (MateFinder mateFinder : maleMateList) {
             System.out.println("Decision:");
             Move move = mateFinder.decide();
-            //adjustImportances(move, mateFinder);
+            adjustImportances(move, mateFinder);
             printImportances();
 
             System.out.println("\n\n\n");
         }
 
+    }
+
+    public static void runFemaleMates() {
+        for (MateFinder mateFinder : femaleMateList) {
+            System.out.println("Decision:");
+            Move move = mateFinder.decide();
+            adjustImportances(move, mateFinder);
+            printImportances();
+
+            System.out.println("\n\n\n");
+        }
     }
 
     public static void printImportances() {
@@ -142,6 +152,25 @@ public class Main {
         System.out.println("relationshipGoal:" + relationshipGoalImportance);
     }
 
+    private static void initializeMaleImportances() {
+        confidenceImportance = -2;
+        physicalAttractionImportance = 3;
+        socialStatusImportance = 0;
+        auraImportance = 3;
+        intelligenceImportance = -2;
+        personalityImportance = 0;
+        relationshipGoalImportance = 0;
+    }
+
+    private static void initializeFemaleImportances() {
+        confidenceImportance = 3;
+        physicalAttractionImportance = 0;
+        socialStatusImportance = 0;
+        auraImportance = 0;
+        intelligenceImportance = 3;
+        personalityImportance = 3;
+        relationshipGoalImportance = 0;
+    }
 
 
 
@@ -158,26 +187,26 @@ public class Main {
         Aura currAura = matefinder.getPotentialMate().getAura();
 
 
-        if (move == Move.ASK_OUT) {
+        if (move == Move.ASK_OUT || move == Move.FLIRT || move == Move.TALK_MORE) {
             if (currPersonality == Level.HIGH) {
-                System.out.println("LEARNING: high personality and made move --> increase personality importance");
+                System.out.println("LEARNING: high personality and positive outcome --> increase personality importance");
                 personalityImportance += 1;
             } else if (currPersonality == Level.LOW) {
-                System.out.println("LEARNING: low personality and made move --> decrease personality importance");
+                System.out.println("LEARNING: low personality and positive outcome --> decrease personality importance");
                 personalityImportance -= 1;
             }
             if (currPhysical == Level.HIGH) {
-                System.out.println("LEARNING: high physical and made move --> increase physical importance");
+                System.out.println("LEARNING: high physical and positive outcome --> increase physical importance");
                 physicalAttractionImportance += 1;
             } else if (currPhysical == Level.LOW) {
-                System.out.println("LEARNING: low physical and made move --> decrease physical importance");
+                System.out.println("LEARNING: low physical and positive outcome --> decrease physical importance");
                 physicalAttractionImportance -= 1;
             }
             if (currIntelligence == Level.HIGH) {
-                System.out.println("LEARNING: high intelligence and made move --> increase intelligence importance");
+                System.out.println("LEARNING: high intelligence and positive outcome --> increase intelligence importance");
                 intelligenceImportance += 1;
             } else if (currIntelligence == Level.LOW) {
-                System.out.println("LEARNING: low intelligence but made move --> decrease intelligence importance");
+                System.out.println("LEARNING: low intelligence but positive outcome --> decrease intelligence importance");
                 intelligenceImportance -= 1;
             }
 
@@ -191,20 +220,20 @@ public class Main {
 
 
             if (currConfidence == Level.HIGH) {
-                System.out.println("LEARNING: high confidence and made move --> increase confidence importance");
+                System.out.println("LEARNING: high confidence and positive outcome --> increase confidence importance");
                 confidenceImportance += 1;
             } else if (currConfidence == Level.LOW) {
-                System.out.println("LEARNING: low confidence and made move --> decrease confidence importance");
+                System.out.println("LEARNING: low confidence and positive outcome --> decrease confidence importance");
                 confidenceImportance -= 1;
             }
 
 
 
             if (currAura == Aura.TALKS_DOWN || currAura == Aura.AWKWARD || currAura == Aura.IGNORANT) {
-                System.out.println("LEARNING: bad aura and made move --> decrease aura importance");
+                System.out.println("LEARNING: bad aura and positive outcome --> decrease aura importance");
                 auraImportance -= 1;
             } else if (currAura == Aura.BOOSTS_MY_EGO) {
-                System.out.println("LEARNING: good aura and made move --> increase aura importance");
+                System.out.println("LEARNING: good aura and positive outcome --> increase aura importance");
                 auraImportance += 1;
             }
         } else if (move == Move.DO_NOT_APPROACH) {

@@ -19,7 +19,6 @@ public class PotentialMate {
     // Exiting professional relationship?{Yes coworkers or student/teacher dynamic, none}
     // Experienced sexually? {has kissed, a long term boyfriend, dates around, hooks up with everyone}
 
-
    private Attraction attraction;
    private String name;
    private ShownInterest interest;

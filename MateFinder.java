@@ -16,10 +16,12 @@ public class MateFinder {
      */
     private PotentialMate potentialMate;
     private UserState currentState;
+    private Gender gender;
 
-    public MateFinder(PotentialMate mate, UserState currentState) {
+    public MateFinder(PotentialMate mate, UserState currentState, Gender gender) {
         potentialMate = mate;
         this.currentState = currentState;
+        this.gender = gender;
     }
 
     public void setPotentialMate(PotentialMate mate) {
@@ -32,6 +34,14 @@ public class MateFinder {
 
     public void setCurrentState(UserState state) {
         currentState = state;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public UserState getCurrentState() {
@@ -222,6 +232,7 @@ public class MateFinder {
         if (currentState.getSobriety().equals(Sobriety.SOBER) || currentState.getSobriety().equals(Sobriety.TIPSY)) {
             System.out.println("The person is sober or is a little tipsy, there is not conflict --> go to the next method");
             //looking for long term
+
             if (currentState.getRelationshipGoal().equals(RelationshipGoal.LONG_TERM)) {
                 System.out.println("If the person goal is looking for a long term relationship, there is no conflict --> go to the next method ");
                 if ((potentialMatePersonality.equals(Level.HIGH) || potentialMatePersonality.equals(Level.MEDIUM))
@@ -234,6 +245,10 @@ public class MateFinder {
                         //attractive person, looking for long term, environment is perfect, make your move
                         if (currentState.getEnvironment().equals(Environment.DEFINITELY) && hasPositiveFeelings) {
                             System.out.println("EMOTION: If the environment is well suited and emotional state is positive, then make a move immediately ");
+                            return Move.ASK_OUT;
+                        }
+                        if (hasNegativeFeelings && potentialMate.getAura() == Aura.BOOSTS_MY_EGO) {
+                            System.out.println("EMOTION: The agent is experiencing negative feelings, but the potential mate is boosting my ego --> make a move");
                             return Move.ASK_OUT;
                         }
                         if (currentState.getMateState().equals(MateState.ALREADY_CRUSH)) {
@@ -284,6 +299,9 @@ public class MateFinder {
                         } else if(hasPositiveFeelings) {
                             System.out.println("EMOTION: emotional state is positive --> flirt");
                             return Move.FLIRT;
+                        } else if (hasNegativeFeelings && potentialMate.getAura() == Aura.BOOSTS_MY_EGO) {
+                            System.out.println("EMOTION: The agent is experiencing negative feelings, but the potential mate is boosting my ego --> make a move");
+                            return Move.ASK_OUT;
                         }
                     }
                     System.out.println("If any of the previous methods conflict --> do not approach");
@@ -345,6 +363,10 @@ public class MateFinder {
                                     return Move.ASK_OUT;
                                 }
                             }
+                            if (hasNegativeFeelings && potentialMate.getAura() == Aura.BOOSTS_MY_EGO) {
+                                System.out.println("EMOTION: The agent is experiencing negative feelings, but the potential mate is boosting my ego --> make a move");
+                                return Move.ASK_OUT;
+                            }
                             //environment is good, userState is drunk, flirt more
                             if (currentState.getEnvironment().equals(Environment.INVITING) || isAroused) {
                                 System.out.println("EMOTION: If the environment is inviting or person is aroused then flirt");
@@ -388,6 +410,10 @@ public class MateFinder {
                                 //environment is not terrible, looking for one night, attractive potential mate, flirt more
                                 return Move.FLIRT;
                             }
+                        }
+                        if (hasNegativeFeelings && potentialMate.getAura() == Aura.BOOSTS_MY_EGO) {
+                            System.out.println("EMOTION: The agent is experiencing negative feelings, but the potential mate is boosting my ego --> flirt");
+                            return Move.FLIRT;
                         }
                         if(isBored) {
                             System.out.println(" the potential mate physique is not good and person is boring --> do not make a move");
