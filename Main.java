@@ -24,9 +24,9 @@ public class Main {
         // START WITH INITIAL NEUTRAL EMOTION
         Emotion neutralEmotion = new Emotion(EmotionalState.NEUTRAL, EmotionalState.NEUTRAL, EmotionalState.NEUTRAL);
 
-        Emotion initialHappy = new Emotion(EmotionalState.HAPPY, EmotionalState.EXCITED, EmotionalState.NEUTRAL);
-        Emotion initialSad = new Emotion(EmotionalState.SAD, EmotionalState.ANGRY, EmotionalState.NEUTRAL);
-        Emotion mixedEmotions = new Emotion(EmotionalState.CONFUSED, EmotionalState.HAPPY, EmotionalState.BORED);
+        Emotion initialHappy = new Emotion(EmotionalState.HAPPY, EmotionalState.EXCITED, EmotionalState.AROUSED);
+        Emotion initialSad = new Emotion(EmotionalState.SAD, EmotionalState.ANGRY, EmotionalState.BORED);
+        Emotion mixedEmotions = new Emotion(EmotionalState.BORED, EmotionalState.CONFUSED, EmotionalState.NEUTRAL);
 
 
         UserState sober_longTerm = new UserState(RelationshipGoal.LONG_TERM, Sobriety.SOBER, MateState.FRIENDS, Environment.INVITING);
@@ -91,27 +91,72 @@ public class Main {
         maleMateList.add(mateFinder7);
 
 
+        System.out.println("\n\n ************************** INITIAL SAD EMOTION **************************");
+
         initializeMaleImportances();
-        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH NEUTRAL INITIAL EMOTION ====================================");
-        emotion = neutralEmotion;
+        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH SAD INITIAL EMOTION ====================================");
+        emotion = initialSad;
         runMaleMates();
 
         System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
         runMaleMates();
 
-        emotion = neutralEmotion;
         initializeFemaleImportances();
-        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH NEUTRAL INITIAL EMOTION ====================================");
-        emotion = neutralEmotion;
+        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH SAD INITIAL EMOTION ====================================");
+        emotion = initialSad;
         runFemaleMates();
 
         System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
         runFemaleMates();
 
 
+        System.out.println("\n\n\n\n ************************** INITIAL HAPPY EMOTION **************************");
+
+
+
+        initializeMaleImportances();
+        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH HAPPY INITIAL EMOTION ====================================");
+        emotion = initialHappy;
+        runMaleMates();
+
+        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
+        runMaleMates();
+
+        initializeFemaleImportances();
+        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH HAPPY INITIAL EMOTION ====================================");
+        emotion = initialHappy;
+        runFemaleMates();
+
+        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
+        runFemaleMates();
+
+
+        System.out.println("\n\n\n\n ************************** INITIAL MIXED EMOTION **************************");
+
+
+
+        initializeMaleImportances();
+        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH MIXED INITIAL EMOTION ====================================");
+        emotion = mixedEmotions;
+        runMaleMates();
+
+        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
+        runMaleMates();
+
+        initializeFemaleImportances();
+        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH MIXED INITIAL EMOTION ====================================");
+        emotion = mixedEmotions;
+        runFemaleMates();
+
+        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
+        runFemaleMates();
+
+
+
+
+
+
     }
-
-
 
 
 
@@ -187,54 +232,54 @@ public class Main {
         Aura currAura = matefinder.getPotentialMate().getAura();
 
 
-        if (move == Move.ASK_OUT || move == Move.FLIRT || move == Move.TALK_MORE) {
+        if (move == Move.ASK_OUT) {
             if (currPersonality == Level.HIGH) {
                 System.out.println("LEARNING: high personality and positive outcome --> increase personality importance");
-                personalityImportance += 1;
+                personalityImportance += 2;
             } else if (currPersonality == Level.LOW) {
                 System.out.println("LEARNING: low personality and positive outcome --> decrease personality importance");
-                personalityImportance -= 1;
+                personalityImportance -= 2;
             }
             if (currPhysical == Level.HIGH) {
                 System.out.println("LEARNING: high physical and positive outcome --> increase physical importance");
-                physicalAttractionImportance += 1;
+                physicalAttractionImportance += 2;
             } else if (currPhysical == Level.LOW) {
                 System.out.println("LEARNING: low physical and positive outcome --> decrease physical importance");
-                physicalAttractionImportance -= 1;
+                physicalAttractionImportance -= 2;
             }
             if (currIntelligence == Level.HIGH) {
                 System.out.println("LEARNING: high intelligence and positive outcome --> increase intelligence importance");
-                intelligenceImportance += 1;
+                intelligenceImportance += 2;
             } else if (currIntelligence == Level.LOW) {
                 System.out.println("LEARNING: low intelligence but positive outcome --> decrease intelligence importance");
-                intelligenceImportance -= 1;
+                intelligenceImportance -= 2;
             }
 
             if (currRelGoal == RelationshipGoal.ONE_NIGHT) {
                 System.out.println("LEARNING: my relationship goal contradicts my move --> decrease relationship goal importance");
-                relationshipGoalImportance -= 1;
+                relationshipGoalImportance -= 2;
             } else if (currRelGoal == RelationshipGoal.LONG_TERM) {
                 System.out.println("LEARNING: my relationship goal supports my move --> increase relationship goal importance");
-                relationshipGoalImportance += 1;
+                relationshipGoalImportance += 2;
             }
 
 
             if (currConfidence == Level.HIGH) {
                 System.out.println("LEARNING: high confidence and positive outcome --> increase confidence importance");
-                confidenceImportance += 1;
+                confidenceImportance += 2;
             } else if (currConfidence == Level.LOW) {
                 System.out.println("LEARNING: low confidence and positive outcome --> decrease confidence importance");
-                confidenceImportance -= 1;
+                confidenceImportance -= 2;
             }
 
 
 
             if (currAura == Aura.TALKS_DOWN || currAura == Aura.AWKWARD || currAura == Aura.IGNORANT) {
                 System.out.println("LEARNING: bad aura and positive outcome --> decrease aura importance");
-                auraImportance -= 1;
+                auraImportance -= 2;
             } else if (currAura == Aura.BOOSTS_MY_EGO) {
                 System.out.println("LEARNING: good aura and positive outcome --> increase aura importance");
-                auraImportance += 1;
+                auraImportance += 2;
             }
         } else if (move == Move.DO_NOT_APPROACH) {
             if (currPersonality == Level.HIGH) {
@@ -284,6 +329,53 @@ public class Main {
             } else if (currAura == Aura.BOOSTS_MY_EGO) {
                 System.out.println("LEARNING: good aura and no move --> decrease aura importance");
                 auraImportance -= 1;
+            }
+        } else if (move == Move.FLIRT) {
+            if (currPersonality == Level.HIGH) {
+                System.out.println("LEARNING: high personality and positive outcome --> increase personality importance");
+                personalityImportance += 1;
+            } else if (currPersonality == Level.LOW) {
+                System.out.println("LEARNING: low personality and positive outcome --> decrease personality importance");
+                personalityImportance -= 1;
+            }
+            if (currPhysical == Level.HIGH) {
+                System.out.println("LEARNING: high physical and positive outcome --> increase physical importance");
+                physicalAttractionImportance += 1;
+            } else if (currPhysical == Level.LOW) {
+                System.out.println("LEARNING: low physical and positive outcome --> decrease physical importance");
+                physicalAttractionImportance -= 1;
+            }
+            if (currIntelligence == Level.HIGH) {
+                System.out.println("LEARNING: high intelligence and positive outcome --> increase intelligence importance");
+                intelligenceImportance += 1;
+            } else if (currIntelligence == Level.LOW) {
+                System.out.println("LEARNING: low intelligence but positive outcome --> decrease intelligence importance");
+                intelligenceImportance -= 1;
+            }
+
+            if (currRelGoal == RelationshipGoal.ONE_NIGHT) {
+                System.out.println("LEARNING: my relationship goal contradicts my move --> decrease relationship goal importance");
+                relationshipGoalImportance -= 1;
+            } else if (currRelGoal == RelationshipGoal.LONG_TERM) {
+                System.out.println("LEARNING: my relationship goal supports my move --> increase relationship goal importance");
+                relationshipGoalImportance += 1;
+            }
+
+
+            if (currConfidence == Level.HIGH) {
+                System.out.println("LEARNING: high confidence and positive outcome --> increase confidence importance");
+                confidenceImportance += 1;
+            } else if (currConfidence == Level.LOW) {
+                System.out.println("LEARNING: low confidence and positive outcome --> decrease confidence importance");
+                confidenceImportance -= 1;
+            }
+
+            if (currAura == Aura.TALKS_DOWN || currAura == Aura.AWKWARD || currAura == Aura.IGNORANT) {
+                System.out.println("LEARNING: bad aura and positive outcome --> decrease aura importance");
+                auraImportance -= 1;
+            } else if (currAura == Aura.BOOSTS_MY_EGO) {
+                System.out.println("LEARNING: good aura and positive outcome --> increase aura importance");
+                auraImportance += 1;
             }
         }
     }

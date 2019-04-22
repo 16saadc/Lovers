@@ -86,36 +86,37 @@ public class MateFinder {
         int lowTrait_highImportanceCount = 0;
 
         //count high important traits
-        if (Main.confidenceImportance > 4 && potentialMate.getConfidence().getLevel() == Level.HIGH) highTraitHighImportanceCount++;
-        if (Main.intelligenceImportance > 4 && potentialMate.getIntelligence().getOverallLevel() == Level.HIGH) highTraitHighImportanceCount++;
-        if (Main.auraImportance > 4 && potentialMate.getAura() == Aura.BOOSTS_MY_EGO) highTraitHighImportanceCount++;
-        if (Main.physicalAttractionImportance > 4 && potentialMatePhysical == Level.HIGH) highTraitHighImportanceCount++;
-        if (Main.personalityImportance > 4 && potentialMatePersonality == Level.HIGH) highTraitHighImportanceCount++;
+        if (Main.confidenceImportance > 3 && potentialMate.getConfidence().getLevel() == Level.HIGH) highTraitHighImportanceCount++;
+        if (Main.intelligenceImportance > 3 && potentialMate.getIntelligence().getOverallLevel() == Level.HIGH) highTraitHighImportanceCount++;
+        if (Main.auraImportance > 3 && potentialMate.getAura() == Aura.BOOSTS_MY_EGO) highTraitHighImportanceCount++;
+        if (Main.physicalAttractionImportance > 3 && potentialMatePhysical == Level.HIGH) highTraitHighImportanceCount++;
+        if (Main.personalityImportance > 3 && potentialMatePersonality == Level.HIGH) highTraitHighImportanceCount++;
 
 
-        if (Main.confidenceImportance > 2 && potentialMate.getConfidence().getLevel() == Level.HIGH) highTraitMediumImportanceCount++;
-        if (Main.intelligenceImportance > 2 && potentialMate.getIntelligence().getOverallLevel() == Level.HIGH) highTraitMediumImportanceCount++;
-        if (Main.auraImportance > 2 && potentialMate.getAura() == Aura.BOOSTS_MY_EGO) highTraitMediumImportanceCount++;
-        if (Main.physicalAttractionImportance > 2 && potentialMatePhysical == Level.HIGH) highTraitMediumImportanceCount++;
-        if (Main.personalityImportance > 2 && potentialMatePersonality == Level.HIGH) highTraitMediumImportanceCount++;
+        if (Main.confidenceImportance > 1 && potentialMate.getConfidence().getLevel() == Level.HIGH) highTraitMediumImportanceCount++;
+        if (Main.intelligenceImportance > 1 && potentialMate.getIntelligence().getOverallLevel() == Level.HIGH) highTraitMediumImportanceCount++;
+        if (Main.auraImportance > 1 && potentialMate.getAura() == Aura.BOOSTS_MY_EGO) highTraitMediumImportanceCount++;
+        if (Main.physicalAttractionImportance > 1 && potentialMatePhysical == Level.HIGH) highTraitMediumImportanceCount++;
+        if (Main.personalityImportance > 1 && potentialMatePersonality == Level.HIGH) highTraitMediumImportanceCount++;
 
 
-        if (Main.confidenceImportance > 2 && potentialMate.getConfidence().getLevel() == Level.LOW) lowTrait_highImportanceCount++;
-        if (Main.intelligenceImportance > 2 && potentialMate.getIntelligence().getOverallLevel() == Level.LOW) lowTrait_highImportanceCount++;
-        if (Main.auraImportance > 2 && (potentialMate.getAura() == Aura.BOOSTS_MY_EGO
+        if (Main.confidenceImportance > 1 && potentialMate.getConfidence().getLevel() == Level.LOW) lowTrait_highImportanceCount++;
+        if (Main.intelligenceImportance > 1 && potentialMate.getIntelligence().getOverallLevel() == Level.LOW) lowTrait_highImportanceCount++;
+        if (Main.auraImportance > 1 && (potentialMate.getAura() == Aura.BOOSTS_MY_EGO
             || potentialMate.getAura() == Aura.TALKS_DOWN
             || potentialMate.getAura() == Aura.IGNORANT)) lowTrait_highImportanceCount++;
-        if (Main.physicalAttractionImportance > 2 && potentialMatePhysical == Level.LOW) lowTrait_highImportanceCount++;
-        if (Main.personalityImportance > 2 && potentialMatePersonality == Level.LOW) lowTrait_highImportanceCount++;
+        if (Main.physicalAttractionImportance > 1 && potentialMatePhysical == Level.LOW) lowTrait_highImportanceCount++;
+        if (Main.personalityImportance > 1 && potentialMatePersonality == Level.LOW) lowTrait_highImportanceCount++;
 
 
 
-        if (highTraitHighImportanceCount > 4) {
+        if (highTraitHighImportanceCount >= 4) {
             System.out.println("EMOTION: This mate has 4 or more traits that I REALLY like, so I am more impressed and happier");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.HIGH);
             Main.updateEmotion(EmotionalState.HAPPY, Level.MEDIUM);
+            Main.updateEmotion(EmotionalState.EXCITED, Level.LOW);
             return;
-        } else if (highTraitHighImportanceCount > 2) {
+        } else if (highTraitHighImportanceCount >= 2) {
             System.out.println("EMOTION: This mate has 2-3 traits that I REALLY like, so I am more impressed and happier");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
             Main.updateEmotion(EmotionalState.HAPPY, Level.LOW);
@@ -124,32 +125,33 @@ public class MateFinder {
             System.out.println("EMOTION: This mate has some traits that I REALLY like, so I am more impressed");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
             return;
-        } else if (highTraitMediumImportanceCount > 4) {
+        } else if (highTraitMediumImportanceCount >= 4) {
             System.out.println("EMOTION: This mate has 4 or more traits that I SORT OF like, so I am more impressed and happier");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
             Main.updateEmotion(EmotionalState.HAPPY, Level.LOW);
             return;
-        } else if (highTraitMediumImportanceCount > 2) {
+        } else if (highTraitMediumImportanceCount >= 2) {
             System.out.println("EMOTION: This mate has 2-3 traits that I SORT OF like, so I am more impressed");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
+            Main.updateEmotion(EmotionalState.EXCITED, Level.LOW);
             return;
         } else if (highTraitMediumImportanceCount > 0) {
             System.out.println("EMOTION: This mate has some traits that I SORT OF like, so I am slightly more impressed");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.LOW);
             return;
-        } else if (lowTrait_highImportanceCount > 4) {
+        } else if (lowTrait_highImportanceCount >= 4) {
             System.out.println("EMOTION: This mate has 4 or more traits that I DO NOT like, so I am a lot more sad and bored");
             Main.updateEmotion(EmotionalState.SAD, Level.HIGH);
             Main.updateEmotion(EmotionalState.BORED, Level.MEDIUM);
             return;
-        } else if (lowTrait_highImportanceCount > 2) {
-            System.out.println("EMOTION: This mate has 2-3 traits that I DO NOT like, so I am slightly more sad and mored");
+        } else if (lowTrait_highImportanceCount >= 2) {
+            System.out.println("EMOTION: This mate has 2-3 traits that I DO NOT like, so I am slightly more sad and bored");
             Main.updateEmotion(EmotionalState.SAD, Level.MEDIUM);
             Main.updateEmotion(EmotionalState.BORED, Level.LOW);
             return;
         } else if (lowTrait_highImportanceCount > 0) {
             System.out.println("EMOTION: This mate has some traits that I DO NOT like, so I am slightly more sad");
-            Main.updateEmotion(EmotionalState.SAD, Level.MEDIUM);
+            Main.updateEmotion(EmotionalState.SAD, Level.LOW);
             return;
         }
     }
@@ -190,9 +192,10 @@ public class MateFinder {
 
         Boolean hasPositiveFeelings = false;
 
-        if(dominantEmotion == EmotionalState.IMPRESSED || dominantEmotion == EmotionalState.HAPPY
-        || dominantEmotion == EmotionalState.AROUSED || secondaryEmotion == EmotionalState.HAPPY || secondaryEmotion == EmotionalState.AROUSED
-        || secondaryEmotion == EmotionalState.IMPRESSED) {
+        if (dominantEmotion == EmotionalState.IMPRESSED && secondaryEmotion == EmotionalState.HAPPY
+        || dominantEmotion == EmotionalState.AROUSED && (secondaryEmotion == EmotionalState.HAPPY || secondaryEmotion == EmotionalState.IMPRESSED)
+        || dominantEmotion == EmotionalState.IMPRESSED && secondaryEmotion == EmotionalState.AROUSED
+        || dominantEmotion == EmotionalState.HAPPY && (secondaryEmotion == EmotionalState.AROUSED || secondaryEmotion == EmotionalState.IMPRESSED)) {
             hasPositiveFeelings = true;
         }
 
@@ -205,7 +208,7 @@ public class MateFinder {
 
         Boolean isAroused = false;
 
-        if(dominantEmotion == EmotionalState.AROUSED || secondaryEmotion == EmotionalState.AROUSED || tertiaryEmotion == EmotionalState.AROUSED) {
+        if(dominantEmotion == EmotionalState.AROUSED || secondaryEmotion == EmotionalState.AROUSED) {
             isAroused = true;
         }
 
@@ -406,7 +409,7 @@ public class MateFinder {
                     if (potentialMatePhysical.equals(Level.HIGH) || potentialMatePhysical.equals(Level.MEDIUM)) {
                         System.out.println("if the potential mate have a good or an average physique at least --> go to next method");
                         if (!currentState.getEnvironment().equals(Environment.NO_GO) || isAroused) {
-                            System.out.println("if the environment is not perfect, but just looking for a one night stand or is aroused --> flirt more");
+                            System.out.println("if the environment is not perfect, but just looking for a one night stand or is aroused --> flirt");
                                 //environment is not terrible, looking for one night, attractive potential mate, flirt more
                                 return Move.FLIRT;
                             }
@@ -419,8 +422,13 @@ public class MateFinder {
                             System.out.println(" the potential mate physique is not good and person is boring --> do not make a move");
                             return Move.DO_NOT_APPROACH;
                         }
-                        System.out.println(" the potential mate physique is not good --> do not make a move");
-                        return Move.DO_NOT_APPROACH;
+                        if (Main.physicalAttractionImportance >= 2) {
+                            System.out.println(" the potential mate physique is not good, and I care about physical attraction --> do not make a move");
+                            return Move.DO_NOT_APPROACH;
+                        } else {
+                            System.out.println("the potential mate physique is not good, but that's not super important --> talk more");
+                            return Move.TALK_MORE;
+                        }
                 } else {
                     //unsure of relationship goal
                     if ((potentialMatePersonality.equals(Level.HIGH) || potentialMatePersonality.equals(Level.MEDIUM))
