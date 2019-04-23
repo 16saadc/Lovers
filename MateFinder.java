@@ -78,14 +78,285 @@ public class MateFinder {
         Level potentialMatePhysical = getPotentialMatePhysicalAttractiveness();
 
         Level shownInterestLevel = getPotentialMateInterest();
+        Level mateSocialStatus = getPotentialMate().getSocialStatus().calculateLevel();
+        Status relationshipStatus = getPotentialMate().getSocialStatus().getRelationshipStatus().getStatus();
+        Environment currEnvironment = this.currentState.getEnvironment();
+        Level mateConfidence = potentialMate.getConfidence().getLevel();
 
+
+
+        /*
+
+        HAPPY, SAD, ANGRY, AROUSED, BORED, CONFUSED, IMPRESSED, EXCITED, NEUTRAL;
+
+        positive
+            intelligence --> impressed
+            shown interest --> aroused / happy
+            aura --> excited
+            personality --> happy / excited
+            physical --> excited / aroused
+            social status --> impressed
+            rel goal --> happy
+            environment --> excited
+            confidence --> aroused
+
+        negative
+            intelligence --> bored
+            shown interest --> sad
+            aura --> angry
+            personality --> bored
+            physical --> bored
+            social status --> not impressed
+            rel goal --> sad
+            environment --> bored / angry
+            confidence --> confused
+
+
+         */
+
+        //CONFIDENCE
+        System.out.println("=== CALCULATING AGENT EMOTION BASED ON CURRENT SITUATION ===");
+        if (Main.confidenceImportance >= 4) {
+            System.out.println("Agent finds confidence VERY important --> ");
+            if (mateConfidence == Level.HIGH) {
+                System.out.println("high confidence in mate --> agent is much more aroused");
+                Main.updateEmotion(EmotionalState.AROUSED, Level.HIGH);
+            } else if (mateConfidence == Level.LOW) {
+                System.out.println("low confidence in mate --> agent is very confused");
+                Main.updateEmotion(EmotionalState.CONFUSED, Level.HIGH);
+            }
+        } else if (Main.confidenceImportance >= 2) {
+            System.out.println("Agent finds confidence pretty important --> ");
+            if (mateConfidence == Level.HIGH) {
+                System.out.println("high confidence in mate--> agent is slightly more aroused");
+                Main.updateEmotion(EmotionalState.AROUSED, Level.MEDIUM);
+            } else if (mateConfidence == Level.LOW) {
+                System.out.println("low confidence in mate --> agent is pretty confused");
+                Main.updateEmotion(EmotionalState.CONFUSED, Level.MEDIUM);
+            }
+        } else if (Main.confidenceImportance == 1) {
+            System.out.println("Agent finds confidence somewhat important --> ");
+            if (mateConfidence == Level.HIGH) {
+                System.out.println("high confidence in mate --> agent is a little more aroused");
+                Main.updateEmotion(EmotionalState.AROUSED, Level.LOW);
+            } else if (mateConfidence == Level.LOW) {
+                System.out.println("low confidence in mate --> agent is a little confused");
+                Main.updateEmotion(EmotionalState.CONFUSED, Level.LOW);
+            }
+        }
+
+
+        //ENVIRONMENT
+        if (Main.environmentImportance >= 4) {
+            System.out.println("Agent finds environment VERY important --> ");
+            if (currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.BE_CONFIDENT || currEnvironment == Environment.INVITING) {
+                Main.updateEmotion(EmotionalState.EXCITED, Level.HIGH);
+                System.out.println("good environment --> agent is a lot more excited");
+            } else if (currEnvironment == Environment.NO_GO) {
+                System.out.println("bad environment --> agent is a lot more bored and angry");
+                Main.updateEmotion(EmotionalState.BORED, Level.HIGH);
+                Main.updateEmotion(EmotionalState.ANGRY, Level.MEDIUM);
+            }
+        } else if (Main.environmentImportance >= 2) {
+            System.out.println("Agent finds environment pretty important --> ");
+            if (currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.BE_CONFIDENT || currEnvironment == Environment.INVITING) {
+                Main.updateEmotion(EmotionalState.EXCITED, Level.MEDIUM);
+                System.out.println("good environment --> agent is slightly more excited");
+            } else if (currEnvironment == Environment.NO_GO) {
+                System.out.println("bad environment --> agent is slightly more bored and angry");
+                Main.updateEmotion(EmotionalState.BORED, Level.MEDIUM);
+                Main.updateEmotion(EmotionalState.ANGRY, Level.LOW);
+            }
+        } else if (Main.environmentImportance == 1) {
+            System.out.println("Agent finds environment somewhat important --> ");
+            if (currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.BE_CONFIDENT || currEnvironment == Environment.INVITING) {
+                Main.updateEmotion(EmotionalState.EXCITED, Level.LOW);
+                System.out.println("good environment --> agent is a little more excited");
+            } else if (currEnvironment == Environment.NO_GO) {
+                System.out.println("bad environment --> agent is a little more bored and angry");
+                Main.updateEmotion(EmotionalState.BORED, Level.LOW);
+            }
+        }
+
+
+
+        //RELATIONSHIP GOAL
+        if (Main.relationshipGoalImportance >= 4) {
+            System.out.println("Agent finds relationship goal VERY important --> ");
+            if (relationshipStatus == Status.SINGLE) {
+                System.out.println("fitting relationship status / goal --> agent is very happy");
+                Main.updateEmotion(EmotionalState.HAPPY, Level.HIGH);
+            } else if (relationshipStatus != Status.SINGLE) {
+                System.out.println("bad relationship status / goal --> agent is very sad");
+                Main.updateEmotion(EmotionalState.SAD, Level.HIGH);
+            }
+        } else if (Main.relationshipGoalImportance >= 2) {
+            System.out.println("Agent finds relationship goal pretty important --> ");
+            if (relationshipStatus == Status.SINGLE) {
+                System.out.println("fitting relationship status / goal --> agent is pretty happy");
+                Main.updateEmotion(EmotionalState.HAPPY, Level.MEDIUM);
+            } else if (relationshipStatus == Status.SINGLE) {
+                System.out.println("bad relationship status / goal --> agent pretty sadder");
+                Main.updateEmotion(EmotionalState.SAD, Level.MEDIUM);
+            }
+        } else if (Main.relationshipGoalImportance == 1) {
+            System.out.println("Agent finds relationship goal somewhat important --> ");
+            if (relationshipStatus == Status.SINGLE) {
+                Main.updateEmotion(EmotionalState.HAPPY, Level.LOW);
+                System.out.println("fitting relationship status / goal --> agent is a little happy");
+            } else if (relationshipStatus == Status.SINGLE) {
+                System.out.println("bad relationship status / goal --> agent is a little sad");
+                Main.updateEmotion(EmotionalState.SAD, Level.LOW);
+            }
+        }
+
+        //SOCIAL STATUS
+        if (Main.socialStatusImportance >= 4) {
+            System.out.println("Agent finds social status VERY important --> ");
+            if (mateSocialStatus == Level.HIGH) {
+                System.out.println("high social status in mate--> agent is very impressed");
+                Main.updateEmotion(EmotionalState.IMPRESSED, Level.HIGH);
+            } else if (mateSocialStatus == Level.LOW) {
+                System.out.println("low social status in mate--> agent is very confused");
+                Main.updateEmotion(EmotionalState.CONFUSED, Level.HIGH);
+            }
+        } else if (Main.socialStatusImportance >= 2) {
+            if (mateSocialStatus == Level.HIGH) {
+                System.out.println("high social status in mate--> agent is slightly more impressed");
+                Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
+            } else if (mateSocialStatus == Level.LOW) {
+                System.out.println("low social status in mate--> agent is a pretty confused");
+                Main.updateEmotion(EmotionalState.CONFUSED, Level.MEDIUM);
+            }
+        } else if (Main.socialStatusImportance == 1) {
+            if (mateSocialStatus == Level.HIGH) {
+                System.out.println("high social status in mate--> agent is a little impressed");
+                Main.updateEmotion(EmotionalState.IMPRESSED, Level.LOW);
+            } else if (mateSocialStatus == Level.LOW) {
+                System.out.println("low social status in mate--> agent is a little confused");
+                Main.updateEmotion(EmotionalState.CONFUSED, Level.LOW);
+            }
+        }
+
+
+        //PHYSICAL
+        if (Main.physicalAttractionImportance >= 4) {
+            if (potentialMatePhysical == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.AROUSED, Level.HIGH);
+                Main.updateEmotion(EmotionalState.EXCITED, Level.MEDIUM);
+            } else if (potentialMatePhysical == Level.LOW) {
+                Main.updateEmotion(EmotionalState.BORED, Level.HIGH);
+            }
+        } else if (Main.physicalAttractionImportance >= 2) {
+            if (potentialMatePhysical == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.AROUSED, Level.MEDIUM);
+                Main.updateEmotion(EmotionalState.EXCITED, Level.LOW);
+            } else if (potentialMatePhysical == Level.LOW) {
+                Main.updateEmotion(EmotionalState.BORED, Level.MEDIUM);
+            }
+        } else if (Main.physicalAttractionImportance == 1) {
+            if (potentialMatePhysical == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.AROUSED, Level.LOW);
+            } else if (potentialMatePhysical == Level.LOW) {
+                Main.updateEmotion(EmotionalState.BORED, Level.LOW);
+            }
+        }
+
+        //PERSONALITY
+        if (Main.personalityImportance >= 4) {
+            if (potentialMatePersonality == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.HAPPY, Level.HIGH);
+                Main.updateEmotion(EmotionalState.EXCITED, Level.MEDIUM);
+            } else if (potentialMatePersonality == Level.LOW) {
+                Main.updateEmotion(EmotionalState.BORED, Level.HIGH);
+            }
+        } else if (Main.personalityImportance >= 2) {
+            if (potentialMatePersonality == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.HAPPY, Level.MEDIUM);
+                Main.updateEmotion(EmotionalState.EXCITED, Level.LOW);
+            } else if (potentialMatePersonality == Level.LOW) {
+                Main.updateEmotion(EmotionalState.BORED, Level.MEDIUM);
+            }
+        } else if (Main.personalityImportance == 1) {
+            if (potentialMatePersonality == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.HAPPY, Level.LOW);
+            } else if (potentialMatePersonality == Level.LOW) {
+                Main.updateEmotion(EmotionalState.BORED, Level.LOW);
+            }
+        }
+
+
+        //INTELLIGENCE
+        if (Main.confidenceImportance >= 4) {
+            if (potentialMate.getConfidence().getLevel() == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.IMPRESSED, Level.HIGH);
+            } else if (potentialMate.getConfidence().getLevel() == Level.LOW) {
+                Main.updateEmotion(EmotionalState.BORED, Level.HIGH);
+            }
+        } else if (Main.confidenceImportance >= 2) {
+            if (potentialMate.getConfidence().getLevel() == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
+            } else if (potentialMate.getConfidence().getLevel() == Level.LOW) {
+                Main.updateEmotion(EmotionalState.BORED, Level.MEDIUM);
+            }
+        } else if (Main.confidenceImportance == 1) {
+            if (potentialMate.getConfidence().getLevel() == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.IMPRESSED, Level.LOW);
+            } else if (potentialMate.getConfidence().getLevel() == Level.LOW) {
+                Main.updateEmotion(EmotionalState.BORED, Level.LOW);
+            }
+        }
+
+        // SHOWN INTEREST
+        if (Main.shownInterestImportance >= 4) {
+            if (potentialMate.getInterest().getInterestLevel() == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.AROUSED, Level.HIGH);
+                Main.updateEmotion(EmotionalState.HAPPY, Level.MEDIUM);
+            } else if (potentialMate.getInterest().getInterestLevel() == Level.LOW) {
+                Main.updateEmotion(EmotionalState.SAD, Level.HIGH);
+            }
+        } else if (Main.shownInterestImportance >= 2) {
+            if (potentialMate.getInterest().getInterestLevel() == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.AROUSED, Level.MEDIUM);
+                Main.updateEmotion(EmotionalState.HAPPY, Level.LOW);
+            } else if (potentialMate.getInterest().getInterestLevel() == Level.LOW) {
+                Main.updateEmotion(EmotionalState.SAD, Level.MEDIUM);
+            }
+        } else if (Main.shownInterestImportance == 1) {
+            if (potentialMate.getInterest().getInterestLevel() == Level.HIGH) {
+                Main.updateEmotion(EmotionalState.AROUSED, Level.LOW);
+            } else if (potentialMate.getInterest().getInterestLevel() == Level.LOW) {
+                Main.updateEmotion(EmotionalState.SAD, Level.LOW);
+            }
+        }
+
+        // AURA
+        if (Main.auraImportance >= 4) {
+            if (potentialMate.getAura() == Aura.BOOSTS_MY_EGO) {
+                Main.updateEmotion(EmotionalState.EXCITED, Level.HIGH);
+            } else if (potentialMate.getAura() == Aura.TALKS_DOWN || potentialMate.getAura() == Aura.IGNORANT || potentialMate.getAura() == Aura.AWKWARD) {
+                Main.updateEmotion(EmotionalState.ANGRY, Level.HIGH);
+            }
+        } else if (Main.auraImportance >= 2) {
+            if (potentialMate.getAura() == Aura.BOOSTS_MY_EGO) {
+                Main.updateEmotion(EmotionalState.EXCITED, Level.MEDIUM);
+            } else if (potentialMate.getAura() == Aura.TALKS_DOWN || potentialMate.getAura() == Aura.IGNORANT || potentialMate.getAura() == Aura.AWKWARD) {
+                Main.updateEmotion(EmotionalState.ANGRY, Level.MEDIUM);
+            }
+        } else if (Main.auraImportance == 1) {
+            if (potentialMate.getAura() == Aura.BOOSTS_MY_EGO) {
+                Main.updateEmotion(EmotionalState.EXCITED, Level.LOW);
+            } else if (potentialMate.getAura() == Aura.TALKS_DOWN || potentialMate.getAura() == Aura.IGNORANT || potentialMate.getAura() == Aura.AWKWARD) {
+                Main.updateEmotion(EmotionalState.ANGRY, Level.LOW);
+            }
+        }
+
+        /*
 
         //adjust emotion based on important traits
         int highTraitHighImportanceCount = 0;
         int highTraitMediumImportanceCount = 0;
         int lowTrait_highImportanceCount = 0;
-
-
 
         //count high important traits
         if (Main.confidenceImportance > 3 && potentialMate.getConfidence().getLevel() == Level.HIGH) highTraitHighImportanceCount++;
@@ -93,6 +364,11 @@ public class MateFinder {
         if (Main.auraImportance > 3 && potentialMate.getAura() == Aura.BOOSTS_MY_EGO) highTraitHighImportanceCount++;
         if (Main.physicalAttractionImportance > 3 && potentialMatePhysical == Level.HIGH) highTraitHighImportanceCount++;
         if (Main.personalityImportance > 3 && potentialMatePersonality == Level.HIGH) highTraitHighImportanceCount++;
+        if (Main.socialStatusImportance > 3 && socialStatus == Level.HIGH) highTraitHighImportanceCount++;
+        if (Main.relationshipGoalImportance > 3 && relationshipStatus == Status.SINGLE) highTraitHighImportanceCount++;
+        if (Main.environmentImportance > 3 && (currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.BE_CONFIDENT || currEnvironment == Environment.INVITING)) highTraitHighImportanceCount++;
+        if (Main.shownInterestImportance > 3 && potentialMate.getInterest().getInterestLevel() == Level.HIGH) highTraitHighImportanceCount++;
+
 
 
         if (Main.confidenceImportance > 1 && potentialMate.getConfidence().getLevel() == Level.HIGH) highTraitMediumImportanceCount++;
@@ -100,6 +376,10 @@ public class MateFinder {
         if (Main.auraImportance > 1 && potentialMate.getAura() == Aura.BOOSTS_MY_EGO) highTraitMediumImportanceCount++;
         if (Main.physicalAttractionImportance > 1 && potentialMatePhysical == Level.HIGH) highTraitMediumImportanceCount++;
         if (Main.personalityImportance > 1 && potentialMatePersonality == Level.HIGH) highTraitMediumImportanceCount++;
+        if (Main.socialStatusImportance > 1 && socialStatus == Level.HIGH) highTraitMediumImportanceCount++;
+        if (Main.relationshipGoalImportance > 1 && relationshipStatus == Status.SINGLE) highTraitMediumImportanceCount++;
+        if (Main.environmentImportance > 1 && (currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.BE_CONFIDENT || currEnvironment == Environment.INVITING)) highTraitMediumImportanceCount++;
+        if (Main.shownInterestImportance > 1 && potentialMate.getInterest().getInterestLevel() == Level.HIGH) highTraitMediumImportanceCount++;
 
 
         if (Main.confidenceImportance > 1 && potentialMate.getConfidence().getLevel() == Level.LOW) lowTrait_highImportanceCount++;
@@ -109,7 +389,10 @@ public class MateFinder {
             || potentialMate.getAura() == Aura.IGNORANT)) lowTrait_highImportanceCount++;
         if (Main.physicalAttractionImportance > 1 && potentialMatePhysical == Level.LOW) lowTrait_highImportanceCount++;
         if (Main.personalityImportance > 1 && potentialMatePersonality == Level.LOW) lowTrait_highImportanceCount++;
-
+        if (Main.socialStatusImportance > 1 && socialStatus == Level.LOW) lowTrait_highImportanceCount++;
+        if (Main.relationshipGoalImportance > 1 && relationshipStatus != Status.SINGLE) lowTrait_highImportanceCount++;
+        if (Main.environmentImportance > 1 && currEnvironment == Environment.NO_GO) lowTrait_highImportanceCount++;
+        if (Main.shownInterestImportance > 1 && potentialMate.getInterest().getInterestLevel() == Level.LOW) lowTrait_highImportanceCount++;
 
 
         if (highTraitHighImportanceCount >= 3) {
@@ -156,6 +439,7 @@ public class MateFinder {
             Main.updateEmotion(EmotionalState.SAD, Level.LOW);
             return;
         }
+        */
     }
 
 
@@ -182,16 +466,18 @@ public class MateFinder {
         EmotionalState secondaryEmotion = emotionalState.getSecondaryEmotion();
         EmotionalState tertiaryEmotion = emotionalState.getTertiaryEmotion();
 
-
-        System.out.println("===========");
+        System.out.println("CURRENT EMOTIONS: \n    primary:" + dominantEmotion + ", secondary:" + secondaryEmotion + ", tertiary:" + tertiaryEmotion);
+        System.out.println("=========== MATE INFO ==========");
         System.out.println("Potential mate: " + potentialMate.getName());
         System.out.println("Potential mate attractiveness level: " + potentialMatePhysical);
         System.out.println("Potential mate personality level: " + potentialMatePersonality);
         System.out.println("Environment: " + currentState.getEnvironment());
         System.out.println("Potential mate interest level: " + shownInterestLevel);
+        System.out.println("================================");
 
-        System.out.println("Emotions: \n    primary:" + dominantEmotion + ", secondary:" + secondaryEmotion + ", tertiary:" + tertiaryEmotion);
 
+
+        System.out.println("============= DECISION PROCESS ============");
         Boolean hasPositiveFeelings = false;
 
         if (dominantEmotion == EmotionalState.IMPRESSED && secondaryEmotion == EmotionalState.HAPPY

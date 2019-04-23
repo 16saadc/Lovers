@@ -12,6 +12,8 @@ public class Main {
     public static int intelligenceImportance = 0;
     public static int personalityImportance = 0;
     public static int relationshipGoalImportance = 0;
+    public static int environmentImportance = 0;
+    public static int shownInterestImportance = 0;
 
     public static Emotion emotion;
     public static UserState currentUserState;
@@ -199,6 +201,7 @@ public class Main {
             Main.emotion = new Emotion(EmotionalState.NEUTRAL, EmotionalState.NEUTRAL, EmotionalState.NEUTRAL);;
             System.out.println("Decision:");
             Move move = mateFinder.decide();
+            System.out.println("========== LEARNING: ADJUSTING IMPORTANCES ============");
             adjustImportances(move, mateFinder);
             printImportances();
 
@@ -216,6 +219,8 @@ public class Main {
         System.out.println("intelligence:" + intelligenceImportance);
         System.out.println("personality:" + personalityImportance);
         System.out.println("relationshipGoal:" + relationshipGoalImportance);
+        System.out.println("environment: " + environmentImportance);
+        System.out.println("shown interest: " + shownInterestImportance);
     }
 
     private static void initializeMaleImportances() {
@@ -226,6 +231,8 @@ public class Main {
         intelligenceImportance = -2;
         personalityImportance = 0;
         relationshipGoalImportance = 0;
+        environmentImportance = 0;
+        shownInterestImportance = 0;
     }
 
     private static void initializeFemaleImportances() {
@@ -236,6 +243,8 @@ public class Main {
         intelligenceImportance = 2;
         personalityImportance = 2;
         relationshipGoalImportance = 0;
+        environmentImportance = 0;
+        shownInterestImportance = 0;
     }
 
 
@@ -251,6 +260,8 @@ public class Main {
         Level currConfidence = matefinder.getPotentialMate().getConfidence().getLevel();
         Level currSocialStatus = matefinder.getPotentialMate().getSocialStatus().calculateLevel();
         Aura currAura = matefinder.getPotentialMate().getAura();
+        Environment currEnvironment = matefinder.getCurrentState().getEnvironment();
+        Level currShownInterest = matefinder.getPotentialMate().getInterest().getInterestLevel();
 
 
         if (move == Move.ASK_OUT) {
@@ -299,6 +310,22 @@ public class Main {
             } else if (currSocialStatus == Level.LOW) {
                 System.out.println("LEARNING: low social status and positive outcome --> decrease social status importance");
                 socialStatusImportance -= 2;
+            }
+
+            if (currEnvironment == Environment.INVITING || currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.BE_CONFIDENT) {
+                System.out.println("LEARNING: good environment and positive outcome --> increase environment importance");
+                environmentImportance += 2;
+            } else if (currEnvironment == Environment.NO_GO) {
+                System.out.println("LEARNING: bad environment and positive outcome --> decrease environment importance");
+                environmentImportance -= 2;
+            }
+
+            if (currShownInterest == Level.HIGH) {
+                System.out.println("LEARNING: high shown interest and positive outcome --> increase shown interest importance");
+                shownInterestImportance += 2;
+            } else if (currShownInterest == Level.LOW) {
+                System.out.println("LEARNING: low shown interest and positive outcome --> decrease shown interest importance");
+                shownInterestImportance -= 2;
             }
 
 
@@ -358,6 +385,22 @@ public class Main {
                 socialStatusImportance += 2;
             }
 
+            if (currEnvironment == Environment.INVITING || currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.BE_CONFIDENT) {
+                System.out.println("LEARNING: good environment and negative outcome --> decrease environment importance");
+                environmentImportance -= 2;
+            } else if (currEnvironment == Environment.NO_GO) {
+                System.out.println("LEARNING: bad environment and negative outcome --> increase environment importance");
+                environmentImportance += 2;
+            }
+
+            if (currShownInterest == Level.HIGH) {
+                System.out.println("LEARNING: high shown interest and no move --> decrease shown interest importance");
+                shownInterestImportance -= 2;
+            } else if (currShownInterest == Level.LOW) {
+                System.out.println("LEARNING: low shown interest and no move --> increase shown interest importance");
+                shownInterestImportance += 2;
+            }
+
 
 
             if (currAura == Aura.TALKS_DOWN || currAura == Aura.AWKWARD || currAura == Aura.IGNORANT) {
@@ -413,6 +456,22 @@ public class Main {
             } else if (currSocialStatus == Level.LOW) {
                 System.out.println("LEARNING: low social status and positive outcome --> decrease social status importance");
                 socialStatusImportance -= 1;
+            }
+
+            if (currEnvironment == Environment.INVITING || currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.BE_CONFIDENT) {
+                System.out.println("LEARNING: good environment and positive outcome --> increase environment importance");
+                environmentImportance += 1;
+            } else if (currEnvironment == Environment.NO_GO) {
+                System.out.println("LEARNING: bad environment and positive outcome --> decrease environment importance");
+                environmentImportance -= 1;
+            }
+
+            if (currShownInterest == Level.HIGH) {
+                System.out.println("LEARNING: high shown interest and positive outcome --> increase shown interest importance");
+                shownInterestImportance += 1;
+            } else if (currShownInterest == Level.LOW) {
+                System.out.println("LEARNING: low shown interest and positive outcome --> decrease shown interest importance");
+                shownInterestImportance -= 1;
             }
 
             if (currAura == Aura.TALKS_DOWN || currAura == Aura.AWKWARD || currAura == Aura.IGNORANT) {
