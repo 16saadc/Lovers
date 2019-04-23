@@ -112,7 +112,7 @@ public class MateFinder {
 
 
 
-        if (highTraitHighImportanceCount >= 4) {
+        if (highTraitHighImportanceCount >= 3) {
             System.out.println("EMOTION: This mate has 4 or more traits that I REALLY like, so I am more impressed and happier");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.HIGH);
             Main.updateEmotion(EmotionalState.HAPPY, Level.MEDIUM);
@@ -127,7 +127,7 @@ public class MateFinder {
             System.out.println("EMOTION: This mate has some traits that I REALLY like, so I am more impressed");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
             return;
-        } else if (highTraitMediumImportanceCount >= 4) {
+        } else if (highTraitMediumImportanceCount >= 3) {
             System.out.println("EMOTION: This mate has 4 or more traits that I SORT OF like, so I am more impressed and happier");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.MEDIUM);
             Main.updateEmotion(EmotionalState.HAPPY, Level.MEDIUM);
@@ -141,7 +141,7 @@ public class MateFinder {
             System.out.println("EMOTION: This mate has some traits that I SORT OF like, so I am slightly more impressed");
             Main.updateEmotion(EmotionalState.IMPRESSED, Level.LOW);
             return;
-        } else if (lowTrait_highImportanceCount >= 4) {
+        } else if (lowTrait_highImportanceCount >= 3) {
             System.out.println("EMOTION: This mate has 4 or more traits that I DO NOT like, so I am a lot more sad and bored");
             Main.updateEmotion(EmotionalState.SAD, Level.HIGH);
             Main.updateEmotion(EmotionalState.BORED, Level.MEDIUM);
@@ -190,7 +190,7 @@ public class MateFinder {
         System.out.println("Environment: " + currentState.getEnvironment());
         System.out.println("Potential mate interest level: " + shownInterestLevel);
 
-        System.out.println("Emotions: " + dominantEmotion + ", " + secondaryEmotion + ", " + tertiaryEmotion);
+        System.out.println("Emotions: \n    primary:" + dominantEmotion + ", secondary:" + secondaryEmotion + ", tertiary:" + tertiaryEmotion);
 
         Boolean hasPositiveFeelings = false;
 
