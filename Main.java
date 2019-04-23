@@ -30,6 +30,7 @@ public class Main {
 
 
         UserState sober_longTerm = new UserState(RelationshipGoal.LONG_TERM, Sobriety.SOBER, MateState.FRIENDS, Environment.INVITING);
+        UserState sober_friends = new UserState(RelationshipGoal.ONE_NIGHT, Sobriety.SOBER, MateState.FRIENDS, Environment.INVITING);
         UserState drunk_Hookup = new UserState(RelationshipGoal.ONE_NIGHT, Sobriety.DRUNK, MateState.FAMILIAR, Environment.INVITING);
         UserState drunk_Uninviting = new UserState(RelationshipGoal.ONE_NIGHT, Sobriety.DRUNK, MateState.FAMILIAR, Environment.NO_GO);
         UserState sober_stranger_neutral = new UserState(RelationshipGoal.UNSURE, Sobriety.SOBER, MateState.NEVER_MET, Environment.NEUTRAL);
@@ -52,6 +53,7 @@ public class Main {
 
         ShownInterest lowShownInterest = new ShownInterest(Level.LOW);
         ShownInterest highShownInterest = new ShownInterest(Level.HIGH);
+        ShownInterest mediumShownInterest = new ShownInterest(Level.MEDIUM);
 
         Confidence lowConfidence = new Confidence(Level.LOW);
         Confidence averageConfidence = new Confidence(Level.MEDIUM);
@@ -64,107 +66,124 @@ public class Main {
         SocialStatus averageSocialStatus = new SocialStatus(Popularity.AVERAGE, Education.AVERAGE_STUDENT, singleStatus);
         SocialStatus lowSocialStatus = new SocialStatus(Popularity.NO_FRIENDS, Education.AVERAGE_STUDENT, singleStatus);
 
-        PotentialMate attractiveMate = new PotentialMate(goodDate, lowShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, highIntelligence, "David");
+        PotentialMate attractiveMateLowConfidence = new PotentialMate(goodDate, lowShownInterest, lowConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "David");
         PotentialMate semiAttractive = new PotentialMate(goodHookup, lowShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Katie");
         PotentialMate notAttractive = new PotentialMate(low, lowShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, lowIntelligence, "Paul");
 
         PotentialMate attractiveConfidentMate = new PotentialMate(goodDate, lowShownInterest, highConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Will");
 
-        PotentialMate notAttractiveQuietWithLowInterest = new PotentialMate(low, lowShownInterest, lowConfidence, lowSocialStatus, Aura.QUIET, lowIntelligence, "Vishal");
+        PotentialMate notAttractiveQuietWithHighConfidence = new PotentialMate(low, mediumShownInterest, highConfidence, lowSocialStatus, Aura.QUIET, mediumIntelligence, "Vishal");
         PotentialMate notAttractiveWithHighInterest = new PotentialMate(low, highShownInterest, averageConfidence, averageSocialStatus, Aura.BOOSTS_MY_EGO, mediumIntelligence, "Karen");
 
 
 
-        MateFinder mateFinder = new MateFinder(attractiveMate, sober_longTerm, Gender.MALE);
+        MateFinder mateFinder = new MateFinder(attractiveMateLowConfidence, sober_longTerm, Gender.MALE);
         MateFinder mateFinder2 = new MateFinder(semiAttractive, drunk_Hookup, Gender.FEMALE);
         MateFinder mateFinder3 = new MateFinder(notAttractive, drunk_Uninviting, Gender.MALE);
-        MateFinder mateFinder4 = new MateFinder(notAttractiveQuietWithLowInterest, drunk_Hookup, Gender.FEMALE);
+        MateFinder mateFinder4 = new MateFinder(notAttractiveQuietWithHighConfidence, drunk_Hookup, Gender.FEMALE);
         MateFinder mateFinder5 = new MateFinder(notAttractiveWithHighInterest, drunk_Uninviting, Gender.FEMALE);
         MateFinder mateFinder6 = new MateFinder(attractiveConfidentMate, sober_longTerm, Gender.MALE);
-        MateFinder mateFinder7 = new MateFinder(notAttractive, drunk_Uninviting, Gender.MALE);
         maleMateList.add(mateFinder);
         femaleMateList.add(mateFinder2);
         maleMateList.add(mateFinder3);
         femaleMateList.add(mateFinder4);
         femaleMateList.add(mateFinder5);
         maleMateList.add(mateFinder6);
-        maleMateList.add(mateFinder7);
 
+        System.out.println("\n\n ************************** INITIAL NEUTRAL EMOTION **************************");
+
+        initializeFemaleImportances();
+        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH SAD INITIAL EMOTION ====================================");
+        runMaleMates(neutralEmotion);
+
+        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
+        emotion = neutralEmotion;
+        System.out.println(emotion.getDominantEmotion());
+        System.out.println(emotion.getSecondaryEmotion());
+        System.out.println(emotion.getTertiaryEmotion());
+        runMaleMates(neutralEmotion);
+
+        initializeMaleImportances();
+        emotion = neutralEmotion;
+        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH SAD INITIAL EMOTION ====================================");
+        runFemaleMates(neutralEmotion);
+
+        emotion = neutralEmotion;
+        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
+        runFemaleMates(neutralEmotion);
+
+        /*
 
         System.out.println("\n\n ************************** INITIAL SAD EMOTION **************************");
 
-        initializeMaleImportances();
+        initializeFemaleImportances();
         System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH SAD INITIAL EMOTION ====================================");
         emotion = initialSad;
-        runMaleMates();
+        runMaleMates(initialSad);
 
         System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
-        runMaleMates();
+        runMaleMates(initialSad);
 
-        initializeFemaleImportances();
+        initializeMaleImportances();
         System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH SAD INITIAL EMOTION ====================================");
         emotion = initialSad;
-        runFemaleMates();
+        runFemaleMates(initialSad);
 
         System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
-        runFemaleMates();
+        runFemaleMates(initialSad);
 
 
         System.out.println("\n\n\n\n ************************** INITIAL HAPPY EMOTION **************************");
 
 
 
-        initializeMaleImportances();
+        initializeFemaleImportances();
         System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH HAPPY INITIAL EMOTION ====================================");
         emotion = initialHappy;
-        runMaleMates();
+        runMaleMates(initialHappy);
 
         System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
-        runMaleMates();
+        runMaleMates(initialHappy);
 
-        initializeFemaleImportances();
+        initializeMaleImportances();
         System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH HAPPY INITIAL EMOTION ====================================");
         emotion = initialHappy;
-        runFemaleMates();
+        runFemaleMates(initialHappy);
 
         System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
-        runFemaleMates();
+        runFemaleMates(initialHappy);
 
 
         System.out.println("\n\n\n\n ************************** INITIAL MIXED EMOTION **************************");
 
 
 
-        initializeMaleImportances();
+        initializeFemaleImportances();
         System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH MIXED INITIAL EMOTION ====================================");
         emotion = mixedEmotions;
-        runMaleMates();
+        runMaleMates(mixedEmotions);
 
         System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
-        runMaleMates();
+        runMaleMates(mixedEmotions);
 
-        initializeFemaleImportances();
+        initializeMaleImportances();
         System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH MIXED INITIAL EMOTION ====================================");
         emotion = mixedEmotions;
-        runFemaleMates();
+        runFemaleMates(mixedEmotions);
 
         System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
-        runFemaleMates();
+        runFemaleMates(mixedEmotions);
 
-
-
-
-
+        */
 
     }
 
 
-
-
-    public static void runMaleMates() {
+    public static void runMaleMates(Emotion currEmotion) {
         //sober, friends with mate, inviting environment, looking for long term, attractive mate:
         for (MateFinder mateFinder : maleMateList) {
             System.out.println("Decision:");
+            Main.emotion = new Emotion(EmotionalState.NEUTRAL, EmotionalState.NEUTRAL, EmotionalState.NEUTRAL);;
             Move move = mateFinder.decide();
             adjustImportances(move, mateFinder);
             printImportances();
@@ -174,8 +193,9 @@ public class Main {
 
     }
 
-    public static void runFemaleMates() {
+    public static void runFemaleMates(Emotion currEmotion) {
         for (MateFinder mateFinder : femaleMateList) {
+            Main.emotion = new Emotion(EmotionalState.NEUTRAL, EmotionalState.NEUTRAL, EmotionalState.NEUTRAL);;
             System.out.println("Decision:");
             Move move = mateFinder.decide();
             adjustImportances(move, mateFinder);
@@ -199,9 +219,9 @@ public class Main {
 
     private static void initializeMaleImportances() {
         confidenceImportance = -2;
-        physicalAttractionImportance = 3;
+        physicalAttractionImportance = 2;
         socialStatusImportance = 0;
-        auraImportance = 3;
+        auraImportance = 2;
         intelligenceImportance = -2;
         personalityImportance = 0;
         relationshipGoalImportance = 0;
@@ -209,11 +229,11 @@ public class Main {
 
     private static void initializeFemaleImportances() {
         confidenceImportance = 3;
-        physicalAttractionImportance = 0;
+        physicalAttractionImportance = -1;
         socialStatusImportance = 0;
         auraImportance = 0;
-        intelligenceImportance = 3;
-        personalityImportance = 3;
+        intelligenceImportance = 2;
+        personalityImportance = 2;
         relationshipGoalImportance = 0;
     }
 
@@ -396,6 +416,11 @@ public class Main {
                 System.out.println("EMOTION: this emotion is my new dominant emotion. It will switch with my old primary emotion");
                 Main.emotion.setSecondaryEmotion(currDominant);
                 Main.emotion.setDominantEmotion(newEmotion);
+            } else if (currTertiary == newEmotion) {
+                System.out.println("EMOTION: this emotion is my new dominant emotion. It will switch with my old primary emotion");
+                Main.emotion.setTertiaryEmotion(currSecondary);
+                Main.emotion.setSecondaryEmotion(currDominant);
+                Main.emotion.setDominantEmotion(newEmotion);
             } else {
                 System.out.println("EMOTION: this emotion is my new dominant emotion. My current primary and secondary emotions will get bumped back");
 
@@ -406,10 +431,22 @@ public class Main {
         } else if (level == Level.MEDIUM) {
             // bump to first if its dominant, secondary, or tertiary
             if (currTertiary == newEmotion || currSecondary == newEmotion || currDominant == newEmotion) {
-                System.out.println("EMOTION: this emotion is already felt --> set it to dominant");
-                Main.emotion.setSecondaryEmotion(currDominant);
-                Main.emotion.setDominantEmotion(newEmotion);
-                Main.emotion.setTertiaryEmotion(currSecondary);
+                if (currSecondary == newEmotion) {
+                    System.out.println("EMOTION: this emotion is my new dominant emotion. It will switch with my old primary emotion");
+                    Main.emotion.setSecondaryEmotion(currDominant);
+                    Main.emotion.setDominantEmotion(newEmotion);
+                } else if (currTertiary == newEmotion) {
+                    System.out.println("EMOTION: this emotion is my new dominant emotion. It will switch with my old primary emotion");
+                    Main.emotion.setTertiaryEmotion(currSecondary);
+                    Main.emotion.setSecondaryEmotion(currDominant);
+                    Main.emotion.setDominantEmotion(newEmotion);
+                } else {
+                    System.out.println("EMOTION: this emotion is my new dominant emotion. My current primary and secondary emotions will get bumped back");
+
+                    Main.emotion.setSecondaryEmotion(currDominant);
+                    Main.emotion.setDominantEmotion(newEmotion);
+                    Main.emotion.setTertiaryEmotion(currSecondary);
+                }
             } else {
                 System.out.println("EMOTION: this emotion is not yet felt --> medium influence so it is now a secondary emotion");
                 Main.emotion.setTertiaryEmotion(currSecondary);
@@ -428,7 +465,6 @@ public class Main {
             } else if (currSecondary == newEmotion) {
                 System.out.println("EMOTION: this emotion is already secondary --> set it to dominant, and bump the old dominant and secondary emotions down");
                 Main.emotion.setSecondaryEmotion(currDominant);
-                Main.emotion.setTertiaryEmotion(currSecondary);
                 Main.emotion.setDominantEmotion(newEmotion);
             } else {
                 System.out.println("EMOTION: this emotion is not yet felt --> low influence so it is now a tertiary emotion");
