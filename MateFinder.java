@@ -501,6 +501,7 @@ public class MateFinder {
      * returns the move to make
      */
     public Move decide() {
+
         Level potentialMatePersonality = getPotentialMatePersonality();
         Level potentialMatePhysical = getPotentialMatePhysicalAttractiveness();
 
@@ -537,6 +538,106 @@ public class MateFinder {
 
 
         System.out.println("============= DECISION PROCESS ============");
+
+
+        int positive = 0;
+        if (dominantEmotion == EmotionalState.IMPRESSED || dominantEmotion == EmotionalState.HAPPY
+            || dominantEmotion == EmotionalState.AROUSED || dominantEmotion == EmotionalState.EXCITED) positive += 3;
+        if (secondaryEmotion == EmotionalState.IMPRESSED || secondaryEmotion == EmotionalState.HAPPY
+            || secondaryEmotion == EmotionalState.AROUSED || secondaryEmotion == EmotionalState.EXCITED) positive += 2;
+        if (tertiaryEmotion == EmotionalState.IMPRESSED || tertiaryEmotion == EmotionalState.HAPPY
+            || tertiaryEmotion == EmotionalState.AROUSED || tertiaryEmotion == EmotionalState.EXCITED) positive++;
+
+        int negative = 0;
+        if (dominantEmotion == EmotionalState.SAD || dominantEmotion == EmotionalState.ANGRY) negative += 3;
+        if (secondaryEmotion == EmotionalState.SAD || secondaryEmotion == EmotionalState.ANGRY) negative += 2;
+        if (tertiaryEmotion == EmotionalState.SAD || tertiaryEmotion == EmotionalState.ANGRY) negative++;
+
+
+        int isAroused = 0;
+
+        if(dominantEmotion == EmotionalState.AROUSED) isAroused = 3;
+        if (secondaryEmotion == EmotionalState.AROUSED) isAroused = 2;
+        if (tertiaryEmotion == EmotionalState.AROUSED) isAroused = 1;
+
+
+        int isConfused = 0;
+
+        if(dominantEmotion == EmotionalState.CONFUSED) isConfused = 3;
+        if (secondaryEmotion == EmotionalState.CONFUSED) isConfused = 2;
+        if (tertiaryEmotion == EmotionalState.CONFUSED) isConfused = 1;
+
+        int isBored = 0;
+
+        if(dominantEmotion == EmotionalState.BORED) isBored = 3;
+        if (secondaryEmotion == EmotionalState.BORED) isBored = 2;
+        if (tertiaryEmotion == EmotionalState.BORED) isBored = 1;
+
+        if(negative >= 5) {
+            System.out.println("If emotional state is extremely negative, agent is not in state to make a move or pursue, do not approach");
+            return Move.DO_NOT_APPROACH;
+        } else if (negative >= 3) {
+            System.out.println("mostly negative emotions, check other factors --> ");
+            if (currentState.getSobriety().equals(Sobriety.SOBER) || currentState.getSobriety().equals(Sobriety.TIPSY)) {
+                System.out.println("Agent is mostly sober --> check environment");
+                if (currEnvironment == Environment.NO_GO) {
+                    System.out.println("Environment is not suitable as well --> dont approach");
+                    return Move.DO_NOT_APPROACH;
+                } else if (currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.INVITING) {
+                    System.out.println("Environment is good --> check if any positive emotions");
+                    if (positive > 1) {
+                        System.out.println("Still have some very positive emotions --> flirt");
+                        return Move.FLIRT;
+                    } else if (positive == 1) {
+                        System.out.println("Slightly positive emotions --> talk more");
+                        return Move.TALK_MORE;
+                    }
+                    System.out.println("No positive emotions --> dont approach");
+                    return Move.DO_NOT_APPROACH;
+
+                }
+            }
+
+        }
+
+        if (positive >= 5) {
+            System.out.println("Feeling extremely positive --> ");
+            if (isAroused == 1) {
+                System.out.println("Slightly aroused as well --> Make a move");
+                return Move.ASK_OUT;
+            } else if (isBored == 1) {
+                System.out.println("Slightly bored --> check environment");
+                if (currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.INVITING) {
+                    System.out.println("Environment is very suitable --> make a move");
+                    return Move.ASK_OUT;
+                } else if (currEnvironment == Environment.NO_GO) {
+                    System.out.println("Environment is bad despite positive emotions --> don't approach");
+                    return Move.DO_NOT_APPROACH;
+                }
+            }
+            System.out.println("All positives --> Make a move");
+            return Move.ASK_OUT;
+        } else if (positive >= 3) {
+            System.out.println("Feeling mostly positive --> ");
+            if (negative == 0) {
+                System.out.println("no negatives --> make a move");
+                return Move.ASK_OUT;
+            }
+            if (currEnvironment == Environment.DEFINITELY || currEnvironment == Environment.INVITING) {
+                System.out.println("Environment is suitable --> make a move");
+                return Move.ASK_OUT;
+            } else {
+                if (isBored >= 2) {
+                    System.out.println("Agent is very bored -->");
+                    // do something
+                }
+            }
+        }
+
+        System.out.println("no criteria to move --> do not approach");
+        return Move.DO_NOT_APPROACH;
+
+        /*
         Boolean hasPositiveFeelings = false;
 
         if (dominantEmotion == EmotionalState.IMPRESSED && secondaryEmotion == EmotionalState.HAPPY
@@ -849,9 +950,11 @@ public class MateFinder {
 
         System.out.println(" --> do not approach");
         return Move.DO_NOT_APPROACH;
-
+        */
 
     }
+
+
 
 
 }
