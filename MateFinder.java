@@ -506,6 +506,12 @@ public class MateFinder {
 
         Level shownInterestLevel = getPotentialMateInterest();
 
+        Level mateSocialStatus = getPotentialMate().getSocialStatus().calculateLevel();
+        Status relationshipStatus = getPotentialMate().getSocialStatus().getRelationshipStatus().getStatus();
+        Environment currEnvironment = this.currentState.getEnvironment();
+        Level mateConfidence = potentialMate.getConfidence().getLevel();
+        Level mateIntelligence = potentialMate.getIntelligence().getOverallLevel();
+
 
         adjustEmotionsBasedOnLearning();
         Emotion emotionalState = Main.emotion;
@@ -518,10 +524,14 @@ public class MateFinder {
         System.out.println("CURRENT EMOTIONS: \n    primary:" + dominantEmotion + ", secondary:" + secondaryEmotion + ", tertiary:" + tertiaryEmotion);
         System.out.println("=========== MATE INFO ==========");
         System.out.println("Potential mate: " + potentialMate.getName());
-        System.out.println("Potential mate attractiveness level: " + potentialMatePhysical);
-        System.out.println("Potential mate personality level: " + potentialMatePersonality);
-        System.out.println("Environment: " + currentState.getEnvironment());
-        System.out.println("Potential mate interest level: " + shownInterestLevel);
+        System.out.println("Mate attractiveness level: " + potentialMatePhysical);
+        System.out.println("Mate personality level: " + potentialMatePersonality);
+        System.out.println("Environment: " + currEnvironment);
+        System.out.println("Mate interest level: " + shownInterestLevel);
+        System.out.println("Mate intelligence level: " + mateIntelligence);
+        System.out.println("Mate social status level: " + mateSocialStatus);
+        System.out.println("Mate relationship status: " + relationshipStatus);
+        System.out.println("Mate confidence: " + mateConfidence);
         System.out.println("================================");
 
 
