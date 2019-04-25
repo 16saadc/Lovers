@@ -96,7 +96,7 @@ public class Main {
         System.out.println("\n\n ************************** INITIAL NEUTRAL EMOTION **************************");
 
         initializeFemaleImportances();
-        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH SAD INITIAL EMOTION ====================================");
+        System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) WITH NEUTRAL INITIAL EMOTION ====================================");
         runMaleMates(neutralEmotion);
 
         System.out.println("\n\n ======================== RUNNING MALE MATES (FEMALE AGENT) AFTER SOME LEARNING AND EXPERIENCED EMOTION ====================================");
@@ -108,7 +108,7 @@ public class Main {
 
         initializeMaleImportances();
         emotion = neutralEmotion;
-        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH SAD INITIAL EMOTION ====================================");
+        System.out.println("\n\n ======================== RUNNING FEMALE MATES (MALE AGENT) WITH NEUTRAL INITIAL EMOTION ====================================");
         runFemaleMates(neutralEmotion);
 
         emotion = neutralEmotion;

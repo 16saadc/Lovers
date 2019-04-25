@@ -552,7 +552,7 @@ public class MateFinder {
         if (dominantEmotion == EmotionalState.SAD || dominantEmotion == EmotionalState.ANGRY) negative += 3;
         if (secondaryEmotion == EmotionalState.SAD || secondaryEmotion == EmotionalState.ANGRY) negative += 2;
         if (tertiaryEmotion == EmotionalState.SAD || tertiaryEmotion == EmotionalState.ANGRY) negative++;
-        System.out.println(negative);
+        //System.out.println(negative);
 
         int isArousedLevel = 0;
 
@@ -560,7 +560,7 @@ public class MateFinder {
         if (secondaryEmotion == EmotionalState.AROUSED) isArousedLevel = 2;
         if (tertiaryEmotion == EmotionalState.AROUSED) isArousedLevel = 1;
 
-        System.out.println(isArousedLevel);
+        //System.out.println(isArousedLevel);
         int isConfusedLevel = 0;
 
         if(dominantEmotion == EmotionalState.CONFUSED) isConfusedLevel = 3;
@@ -576,7 +576,7 @@ public class MateFinder {
         if(negative >= 5) {
             System.out.println("If emotional state is extremely negative, agent is not in state to make a move or pursue, do not approach");
             return Move.DO_NOT_APPROACH;
-        } 
+        }
 
         if (positive >= 5) {
             System.out.println("EMOTION: Feeling extremely positive --> ");
@@ -595,7 +595,7 @@ public class MateFinder {
             }
             System.out.println("All positives --> Make a move");
             return Move.ASK_OUT;
-        } 
+        }
 
         // else if (negative >= 3) {
         //     System.out.println("mostly negative emotions, check other factors --> ");
@@ -620,7 +620,7 @@ public class MateFinder {
         //     }
 
         // }
-        
+
         Boolean hasPositiveFeelings = false;
 
         if (dominantEmotion == EmotionalState.IMPRESSED && secondaryEmotion == EmotionalState.HAPPY
@@ -654,11 +654,11 @@ public class MateFinder {
         if(dominantEmotion == EmotionalState.BORED) {
             isBored = true;
         }
-        System.out.println(hasPositiveFeelings);
-        System.out.println(hasNegativeFeelings);
-        System.out.println(isAroused);
-        System.out.println(isBored);
-        System.out.println(isConfused);
+        System.out.println("Has positive feelings: " + hasPositiveFeelings);
+        System.out.println("Has negative feelings: " + hasNegativeFeelings);
+        System.out.println("Aroused: " + isAroused);
+        System.out.println("Bored: " + isBored);
+        System.out.println("Confused: " + isConfused);
         //Prioritize dominant negative emotions for decisions for what move to make over logic based in traits
         if(dominantEmotion == EmotionalState.ANGRY || secondaryEmotion == EmotionalState.ANGRY) {
             System.out.println("EMOTION: If emotional state is angry, no reason to make a move or pursue, do not approach");
@@ -940,7 +940,7 @@ public class MateFinder {
 
         System.out.println(" --> do not approach");
         return Move.DO_NOT_APPROACH;
-        
+
 
     }
 
